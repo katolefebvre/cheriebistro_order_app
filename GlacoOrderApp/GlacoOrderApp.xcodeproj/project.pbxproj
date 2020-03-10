@@ -15,6 +15,8 @@
 		CD92832B24180F54009830A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD92832924180F54009830A9 /* LaunchScreen.storyboard */; };
 		CD92833424181003009830A9 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92833324181003009830A9 /* MenuItem.swift */; };
 		CD928336241810D8009830A9 /* ItemCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD928335241810D8009830A9 /* ItemCategory.swift */; };
+		CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92833824181415009830A9 /* AddFoodItemViewController.swift */; };
+		CD92833C241815E9009830A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92833B241815E9009830A9 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		CD92832C24180F54009830A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD92833324181003009830A9 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		CD928335241810D8009830A9 /* ItemCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategory.swift; sourceTree = "<group>"; };
+		CD92833824181415009830A9 /* AddFoodItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodItemViewController.swift; sourceTree = "<group>"; };
+		CD92833B241815E9009830A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD92833C241815E9009830A9 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +51,7 @@
 			children = (
 				CD92831D24180F54009830A9 /* GlacoOrderApp */,
 				CD92831C24180F54009830A9 /* Products */,
+				CD92833A241815E8009830A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,10 +66,10 @@
 		CD92831D24180F54009830A9 /* GlacoOrderApp */ = {
 			isa = PBXGroup;
 			children = (
+				CD928337241813FF009830A9 /* ViewControllers */,
 				CD92833224180F86009830A9 /* Model */,
 				CD92831E24180F54009830A9 /* AppDelegate.swift */,
 				CD92832024180F54009830A9 /* SceneDelegate.swift */,
-				CD92832224180F54009830A9 /* ViewController.swift */,
 				CD92832424180F54009830A9 /* Main.storyboard */,
 				CD92832724180F54009830A9 /* Assets.xcassets */,
 				CD92832924180F54009830A9 /* LaunchScreen.storyboard */,
@@ -79,6 +85,23 @@
 				CD928335241810D8009830A9 /* ItemCategory.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CD928337241813FF009830A9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD92832224180F54009830A9 /* ViewController.swift */,
+				CD92833824181415009830A9 /* AddFoodItemViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CD92833A241815E8009830A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD92833B241815E9009830A9 /* QuartzCore.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +180,7 @@
 				CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */,
 				CD928336241810D8009830A9 /* ItemCategory.swift in Sources */,
 				CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */,
+				CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,10 +330,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.01;
 				PRODUCT_BUNDLE_IDENTIFIER = glaco.GlacoOrderApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -323,10 +348,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.01;
 				PRODUCT_BUNDLE_IDENTIFIER = glaco.GlacoOrderApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
