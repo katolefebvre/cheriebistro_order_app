@@ -9,7 +9,9 @@
 import UIKit
 import QuartzCore
 
-class AddFoodItemViewController: UIViewController {
+class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate {
+    
+    var categories : [String] = []
 
     @IBOutlet var DescriptionTextView: UITextView!
     
@@ -19,6 +21,30 @@ class AddFoodItemViewController: UIViewController {
         DescriptionTextView.layer.cornerRadius = 5
         DescriptionTextView.layer.borderColor = UIColor.lightGray.cgColor
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func displayPopover(_ sender: UIButton) {
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CategoryPopoverViewController") as! CategoryPopoverViewController
+        vc.modalPresentationStyle = .popover
+        vc.controllerDelegate = self
+        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+        popover.sourceView = sender
+        present(vc, animated: true, completion:nil)
+    }
+    
+    @IBAction func submitAddFoodItem(_ sender: Any) {
+        for category in categories {
+            print(category)
+        }
+    }
+    
+    func addCategory(category: String) {
+        categories.append(category)
+    }
+    
+    func removeCategory(category: String) {
+        categories.remove(at: (categories.firstIndex(of: category)!))
     }
     
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */; };
 		CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */; };
 		CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92831E24180F54009830A9 /* AppDelegate.swift */; };
 		CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92832024180F54009830A9 /* SceneDelegate.swift */; };
@@ -18,9 +19,11 @@
 		CD928336241810D8009830A9 /* ItemCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD928335241810D8009830A9 /* ItemCategory.swift */; };
 		CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92833824181415009830A9 /* AddFoodItemViewController.swift */; };
 		CD92833C241815E9009830A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92833B241815E9009830A9 /* QuartzCore.framework */; };
+		CDAD18B32419535700718E2F /* CategoryPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPopoverControllerDelegate.swift; sourceTree = "<group>"; };
 		CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCategoryViewController.swift; sourceTree = "<group>"; };
 		CD92831B24180F54009830A9 /* GlacoOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlacoOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92831E24180F54009830A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +37,7 @@
 		CD928335241810D8009830A9 /* ItemCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCategory.swift; sourceTree = "<group>"; };
 		CD92833824181415009830A9 /* AddFoodItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodItemViewController.swift; sourceTree = "<group>"; };
 		CD92833B241815E9009830A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPopoverViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 			children = (
 				CD92833324181003009830A9 /* MenuItem.swift */,
 				CD928335241810D8009830A9 /* ItemCategory.swift */,
+				CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 				CD92832224180F54009830A9 /* ViewController.swift */,
 				CD92833824181415009830A9 /* AddFoodItemViewController.swift */,
 				CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */,
+				CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -182,8 +188,10 @@
 				CD92833424181003009830A9 /* MenuItem.swift in Sources */,
 				CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */,
 				CD928336241810D8009830A9 /* ItemCategory.swift in Sources */,
+				CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */,
 				CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */,
 				CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */,
+				CDAD18B32419535700718E2F /* CategoryPopoverViewController.swift in Sources */,
 				CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

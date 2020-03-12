@@ -42,7 +42,4 @@ class AddFoodCategoryViewController: UIViewController {
 
         present(addAlert, animated: true, completion: nil)
     }
-    
-    
-    
 }
