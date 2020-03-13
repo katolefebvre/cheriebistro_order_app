@@ -38,7 +38,7 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     @IBAction func submitAddFoodItem(_ sender: Any) {
         
         
-        let alertBox = UIAlertController(title: "Add Food Item", message: "Are you sure you want to add \(nameTextField.text!) to the menu?"\, preferredStyle: .alert)
+        let alertBox = UIAlertController(title: "Add Food Item", message: "Are you sure you want to add \(nameTextField.text!) to the menu?", preferredStyle: .alert)
         
         let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let yesAction = UIAlertAction(title: "Confirm", style: .default, handler: { (alert) in
