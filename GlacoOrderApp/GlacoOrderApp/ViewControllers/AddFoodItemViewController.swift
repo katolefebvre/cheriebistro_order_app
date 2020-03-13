@@ -11,9 +11,11 @@ import QuartzCore
 
 class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate {
     
-    var categories : [String] = []
+    internal var categories : [String] = []
 
     @IBOutlet var DescriptionTextView: UITextView!
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var priceTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +36,19 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     }
     
     @IBAction func submitAddFoodItem(_ sender: Any) {
-        for category in categories {
-            print(category)
-        }
+        
+        
+        let alertBox = UIAlertController(title: "Add Food Item", message: "Are you sure you want to add \(nameTextField.text!) to the menu?"\, preferredStyle: .alert)
+        
+        let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let yesAction = UIAlertAction(title: "Confirm", style: .default, handler: { (alert) in
+            // HANDLE ADDING OF FOOD ITEM
+        })
+        
+        alertBox.addAction(noAction)
+        alertBox.addAction(yesAction)
+        
+        self.present(alertBox, animated: true, completion: nil)
     }
     
     func addCategory(category: String) {
