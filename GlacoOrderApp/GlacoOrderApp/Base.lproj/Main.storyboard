@@ -132,9 +132,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add Food Item" id="t5p-qb-Me9"/>
                     <connections>
-                        <outlet property="DescriptionTextView" destination="Nng-gF-Tu0" id="zIR-Ki-91z"/>
-                        <outlet property="nameTextField" destination="8Bj-JC-OD2" id="Dul-1r-8Xf"/>
-                        <outlet property="priceTextField" destination="QWk-ye-dgA" id="OHV-Ph-J3d"/>
+                        <outlet property="tfName" destination="8Bj-JC-OD2" id="VUA-ie-aoQ"/>
+                        <outlet property="tfPrice" destination="QWk-ye-dgA" id="1Kr-a5-JrF"/>
+                        <outlet property="tvDescription" destination="Nng-gF-Tu0" id="mwP-Lq-lwK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hi-oo-Mzi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
