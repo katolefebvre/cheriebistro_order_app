@@ -13,18 +13,57 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     
     internal var categories : [String] = []
 
-    @IBOutlet var DescriptionTextView: UITextView!
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var priceTextField: UITextField!
+    @IBOutlet var tvDescription: UITextView!
+    @IBOutlet var tfName: UITextField!
+    @IBOutlet var tfPrice: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DescriptionTextView.layer.borderWidth = 0.5
-        DescriptionTextView.layer.cornerRadius = 5
-        DescriptionTextView.layer.borderColor = UIColor.lightGray.cgColor
+        tvDescription.layer.borderWidth = 0.5
+        tvDescription.layer.cornerRadius = 5
+        tvDescription.layer.borderColor = UIColor.lightGray.cgColor
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func sendToDB(_ sender: Any) {
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/api/addfooditem.php")!
+        let url = NSMutableURLRequest(url: address)
+        url.httpMethod = "POST"
+        
+        var dataString = "name=\(tfName.text!)"
+        dataString = dataString + "&description=\(tvDescription.text!)"
+        dataString = dataString + "&category_id=1"
+        dataString = dataString + "&price=\(tfPrice.text!)"
+        
+        let dataD = dataString.data(using: .utf8)
+        
+        do {
+            let uploadJob = URLSession.shared.uploadTask(with: url as URLRequest, from: dataD) {
+                data, response, error in
+                if error != nil {
+                    self.showError()
+                } else {
+                    if let unwrappedData = data {
+                        let jsonResponse = try! JSONSerialization.jsonObject(with: unwrappedData, options: [])
+                        guard let jsonArray = jsonResponse as? [String: String] else {
+                            return
+                        }
+
+                        if jsonArray["error"] == "false" {
+                            DispatchQueue.main.async {
+                                let alert = UIAlertController(title: "Upload Successful", message: "Menu item added successfully.", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                        } else {
+                            self.showError()
+                        }
+                    }
+                }
+            }
+            uploadJob.resume()
+        }
+    }
     @IBAction func displayPopover(_ sender: UIButton) {
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CategoryPopoverViewController") as! CategoryPopoverViewController
@@ -35,6 +74,13 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         present(vc, animated: true, completion:nil)
     }
     
+    func showError() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Upload Failed", message: "Menu item failed to upload.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     @IBAction func submitAddFoodItem(_ sender: Any) {
         
         
