@@ -56,7 +56,7 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         
         var dataString = "name=\(tfName.text!)"
         dataString = dataString + "&description=\(tvDescription.text!)"
-        dataString = dataString + "&category_id=1"
+        dataString = dataString + "&time_slot_id=1"
         dataString = dataString + "&price=\(tfPrice.text!)"
         
         let dataD = dataString.data(using: .utf8)
