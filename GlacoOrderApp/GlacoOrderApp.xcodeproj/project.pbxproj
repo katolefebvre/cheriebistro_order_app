@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D4BAF09242A94C5000694C5 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4BAF08242A94C5000694C5 /* TimeSlot.swift */; };
 		CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */; };
 		CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */; };
 		CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92831E24180F54009830A9 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D4BAF08242A94C5000694C5 /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPopoverControllerDelegate.swift; sourceTree = "<group>"; };
 		CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCategoryViewController.swift; sourceTree = "<group>"; };
 		CD92831B24180F54009830A9 /* GlacoOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlacoOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +95,7 @@
 				CD928335241810D8009830A9 /* ItemCategory.swift */,
 				CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */,
 				CDBA97E8242AE3350050F272 /* DatabaseIdTableViewCell.swift */,
+				7D4BAF08242A94C5000694C5 /* TimeSlot.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D4BAF09242A94C5000694C5 /* TimeSlot.swift in Sources */,
 				CD92832324180F54009830A9 /* ViewController.swift in Sources */,
 				CD92833424181003009830A9 /* MenuItem.swift in Sources */,
 				CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */,

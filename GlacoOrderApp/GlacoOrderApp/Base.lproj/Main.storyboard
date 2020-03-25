@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="138"/>
+            <point key="canvasLocation" x="138.69346733668343" y="137.41007194244605"/>
         </scene>
         <!--Add Food Item-->
         <scene sceneID="WoX-0i-Yv8">
@@ -109,10 +109,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxc-A1-2jp">
-                                <rect key="frame" x="552" y="513" width="95" height="36"/>
+                                <rect key="frame" x="554" y="513" width="92" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Categories"/>
+                                <state key="normal" title="Time Slots"/>
                                 <connections>
                                     <action selector="displayPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="pkT-61-dx6"/>
                                 </connections>
@@ -196,19 +196,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2fy-UQ-TMv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2fy-UQ-TMv">
                                 <rect key="frame" x="0.0" y="44" width="1194" height="790"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <sections/>
                                 <connections>
-                                    <outlet property="dataSource" destination="c2H-vZ-VNt" id="NaK-w9-FsO"/>
-                                    <outlet property="delegate" destination="c2H-vZ-VNt" id="MJ2-l8-Lm2"/>
+                                    <outlet property="dataSource" destination="c2H-vZ-VNt" id="zqO-QB-SP6"/>
+                                    <outlet property="delegate" destination="c2H-vZ-VNt" id="6f2-Dz-gbd"/>
                                 </connections>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0K-vn-hV6">
                                 <rect key="frame" x="0.0" y="0.0" width="1194" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Categories" id="Y05-y7-KvA"/>
+                                    <navigationItem title="Time Slots" id="Y05-y7-KvA"/>
                                 </items>
                             </navigationBar>
                         </subviews>
@@ -221,6 +222,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vOU-hW-zFA"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="2fy-UQ-TMv" id="7nB-ho-Ho4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TK0-zf-S8Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
