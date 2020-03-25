@@ -11,17 +11,19 @@ import UIKit
 class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var controllerDelegate : CategoryPopoverControllerDelegate?
+    var categoryIds : [String] = []
     var categoryNames : [String] = []
-    var categoryIds : [Int] = []
+    
+    @IBOutlet var categoryTable : UITableView!
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        categoryIds = ["1", "2", "3"]
         categoryNames = ["Gluten-Free", "Vegan", "Vegetarian"]
-        categoryIds = [1, 2, 3]
+        super.viewDidLoad()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryNames.count
+        return categoryIds.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -29,14 +31,14 @@ class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell : DatabaseIdTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "category") as? DatabaseIdTableViewCell ?? DatabaseIdTableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: "category")
+        let tableCell : DatabaseIdTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "time_slot") as? DatabaseIdTableViewCell ?? DatabaseIdTableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: "time_slot")
         
         let cellBackgroundView = UIView()
         cellBackgroundView.backgroundColor = .systemBlue
         
-        tableCell?.textLabel?.font = UIFont.systemFont(ofSize: 25)
+        tableCell?.textLabel?.font = UIFont.systemFont(ofSize: 24)
         tableCell?.textLabel?.text = categoryNames[indexPath.row]
-        tableCell?.databaseId = categoryIds[indexPath.row]
+        tableCell?.databaseId = (Int)(categoryIds[indexPath.row])
         tableCell?.selectedBackgroundView = cellBackgroundView
         
         return tableCell!

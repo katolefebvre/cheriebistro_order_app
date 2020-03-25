@@ -11,7 +11,7 @@ import QuartzCore
 
 class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate, TimeSlotPopoverControllerDelegate {
     
-    internal var timeSlots: [Int] = []
+    internal var timeSlot: Int = 0
     internal var categories : [Int] = []
 
     @IBOutlet var tvDescription: UITextView!
@@ -23,7 +23,6 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         tvDescription.layer.borderWidth = 0.5
         tvDescription.layer.cornerRadius = 5
         tvDescription.layer.borderColor = UIColor.lightGray.cgColor
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func displayTimeSlotPopover(_ sender : UIButton) {
@@ -67,7 +66,7 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         
         var dataString = "name=\(tfName.text!)"
         dataString = dataString + "&description=\(tvDescription.text!)"
-        dataString = dataString + "&time_slot_id=1"
+        dataString = dataString + "&time_slot_id=\(timeSlot)"
         dataString = dataString + "&price=\(tfPrice.text!)"
         
         let dataD = dataString.data(using: .utf8)
@@ -76,7 +75,7 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
             let uploadJob = URLSession.shared.uploadTask(with: url as URLRequest, from: dataD) {
                 data, response, error in
                 if error != nil {
-                    self.showError()
+                    self.showError(message: "Failed to connect.")
                 } else {
                     if let unwrappedData = data {
                         let jsonResponse = try! JSONSerialization.jsonObject(with: unwrappedData, options: [])
@@ -91,7 +90,7 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
                                 self.present(alert, animated: true, completion: nil)
                             }
                         } else {
-                            self.showError()
+                            self.showError(message: "Menu item failed to upload.")
                         }
                     }
                 }
@@ -100,9 +99,9 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         }
     }
     
-    func showError() {
+    func showError(message: String) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Upload Failed", message: "Menu item failed to upload.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Failure Occurred", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -114,13 +113,5 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     
     func removeCategory(categoryId : Int) {
         categories.remove(at: (categories.firstIndex(of: categoryId)!))
-    }
-    
-    func addTimeSlot(timeSlotId: Int) {
-        timeSlots.append(timeSlotId)
-    }
-    
-    func removeTimeSlot(timeSlotId: Int) {
-        timeSlots.remove(at: (timeSlots.firstIndex(of: timeSlotId)!))
     }
 }

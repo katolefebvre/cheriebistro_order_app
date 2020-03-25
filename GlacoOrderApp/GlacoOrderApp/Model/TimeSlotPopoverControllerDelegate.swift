@@ -9,9 +9,7 @@
 import Foundation
 
 protocol TimeSlotPopoverControllerDelegate {
-    var timeSlots : [Int] { get set }
     
-    func addTimeSlot(timeSlotId : Int)
-    func removeTimeSlot(timeSlotId : Int)
+    var timeSlot : Int { get set }
     
 }

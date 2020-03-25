@@ -114,7 +114,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Categories"/>
                                 <connections>
-                                    <action selector="displayCategoryPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="pkT-61-dx6"/>
+                                    <action selector="displayCategoryPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="ipD-O7-fgL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUd-J3-EuD">
@@ -132,7 +132,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Time Slot"/>
                                 <connections>
-                                    <action selector="displayTimeSlotPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="nex-Yv-prO"/>
+                                    <action selector="displayTimeSlotPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="2qZ-2o-Rqu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -230,6 +230,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vOU-hW-zFA"/>
                     </view>
+                    <connections>
+                        <outlet property="categoryTable" destination="2fy-UQ-TMv" id="iem-XZ-i1f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TK0-zf-S8Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -268,6 +271,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bih-If-7vh"/>
                     </view>
+                    <connections>
+                        <outlet property="timeSlotTable" destination="9OX-Cv-vnF" id="wp5-tz-Dhj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2zr-By-4I5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
