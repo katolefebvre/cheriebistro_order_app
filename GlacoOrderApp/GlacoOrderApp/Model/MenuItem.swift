@@ -10,18 +10,22 @@ import Foundation
 
 public class MenuItem {
     
+    // NOTE: Removing categories for now until I can get it to work
+    
     let id : Int
     let name : String
+    let description : String
     let price : Float
-    let availability : Bool
-    let category : Category
+    let timeslot : TimeSlot
+//    let categories : [Category]
     
-    init(id: Int, name: String, price: Float, availability: Bool, category: Category) {
+    init(id: Int, name: String, description: String, price: Float, timeslot: TimeSlot) {
         self.id = id
         self.name = name
+        self.description = description
         self.price = price
-        self.availability = availability
-        self.category = category
+        self.timeslot = timeslot
+//        self.categories = categories
     }
     
     

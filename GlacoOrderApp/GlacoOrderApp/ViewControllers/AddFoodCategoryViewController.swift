@@ -17,7 +17,6 @@ class AddFoodCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addCategoryButton.isEnabled = false
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func onCateogryTextFieldChange(_ sender: Any) {

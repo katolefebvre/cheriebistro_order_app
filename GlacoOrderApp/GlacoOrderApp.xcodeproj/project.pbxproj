@@ -118,8 +118,8 @@
 				CD81598A242BB77500501365 /* TimeSlot.swift */,
 				CD92833324181003009830A9 /* MenuItem.swift */,
 				CD928335241810D8009830A9 /* Category.swift */,
-				CDBA97E8242AE3350050F272 /* DatabaseIdTableViewCell.swift */,
 				7DF49535242BDE8F00AF3B64 /* DatabaseAccess.swift */,
+				CDBA97E8242AE3350050F272 /* DatabaseIdTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

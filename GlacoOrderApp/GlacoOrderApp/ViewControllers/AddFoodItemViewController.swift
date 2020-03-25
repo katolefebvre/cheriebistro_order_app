@@ -50,53 +50,22 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         
         let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let yesAction = UIAlertAction(title: "Confirm", style: .default, handler: { (alert) in
-            self.sendToDB()
+            let response : [String : String] = DatabaseAccess.addMenuItem(name: self.tfName.text!, description: self.tvDescription.text!, timeslotID: self.timeSlot!.id!, price: self.tfPrice.text!)
+            if response["error"] == "false" {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Upload Successful", message: "Menu item added successfully.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            } else {
+                self.showError(message: "Menu item failed to upload.")
+            }
         })
         
         alertBox.addAction(noAction)
         alertBox.addAction(yesAction)
         
         self.present(alertBox, animated: true, completion: nil)
-    }
-    
-    func sendToDB() {
-        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/api/addfooditem.php")!
-        let url = NSMutableURLRequest(url: address)
-        url.httpMethod = "POST"
-        
-        var dataString = "name=\(tfName.text!)"
-        dataString = dataString + "&description=\(tvDescription.text!)"
-        dataString = dataString + "&time_slot_id=\(timeSlot?.id ?? 0)"
-        dataString = dataString + "&price=\(tfPrice.text!)"
-        
-        let dataD = dataString.data(using: .utf8)
-        
-        do {
-            let uploadJob = URLSession.shared.uploadTask(with: url as URLRequest, from: dataD) {
-                data, response, error in
-                if error != nil {
-                    self.showError(message: "Failed to connect.")
-                } else {
-                    if let unwrappedData = data {
-                        let jsonResponse = try! JSONSerialization.jsonObject(with: unwrappedData, options: [])
-                        guard let jsonArray = jsonResponse as? [String: String] else {
-                            return
-                        }
-
-                        if jsonArray["error"] == "false" {
-                            DispatchQueue.main.async {
-                                let alert = UIAlertController(title: "Upload Successful", message: "Menu item added successfully.", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
-                            }
-                        } else {
-                            self.showError(message: "Menu item failed to upload.")
-                        }
-                    }
-                }
-            }
-            uploadJob.resume()
-        }
     }
     
     func showError(message: String) {

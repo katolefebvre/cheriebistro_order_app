@@ -13,7 +13,6 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet var timeSlotTable: UITableView!
     var controllerDelegate : TimeSlotPopoverControllerDelegate?
     var timeSlots : [TimeSlot] = []
-    var databaseAccess : DatabaseAccess!
 
     override func viewDidLoad() {
         super.viewDidLoad()
