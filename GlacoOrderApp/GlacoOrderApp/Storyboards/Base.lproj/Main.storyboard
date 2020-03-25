@@ -109,21 +109,30 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxc-A1-2jp">
-                                <rect key="frame" x="552" y="513" width="95" height="36"/>
+                                <rect key="frame" x="552" y="562" width="95" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Categories"/>
                                 <connections>
-                                    <action selector="displayPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="pkT-61-dx6"/>
+                                    <action selector="displayCategoryPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="pkT-61-dx6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUd-J3-EuD">
-                                <rect key="frame" x="569" y="603" width="62" height="36"/>
+                                <rect key="frame" x="568" y="634" width="62" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="submitAddFoodItem:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="ivF-NX-eKi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNF-rJ-8sS">
+                                <rect key="frame" x="557" y="518" width="82" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Time Slot"/>
+                                <connections>
+                                    <action selector="displayTimeSlotPopover:" destination="ABT-Gu-zdc" eventType="touchUpInside" id="nex-Yv-prO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -225,6 +234,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TK0-zf-S8Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="904.5226130653266" y="1139.5683453237411"/>
+        </scene>
+        <!--Time Slot Popover View Controller-->
+        <scene sceneID="lzT-8f-GtV">
+            <objects>
+                <viewController storyboardIdentifier="TimeSlotPopoverViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eCR-f0-qK0" customClass="TimeSlotPopoverViewController" customModule="GlacoOrderApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jJP-ST-9OB">
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9OX-Cv-vnF">
+                                <rect key="frame" x="0.0" y="44" width="1194" height="790"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="eCR-f0-qK0" id="nwH-0O-0L3"/>
+                                    <outlet property="delegate" destination="eCR-f0-qK0" id="6pB-ho-NuL"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bhs-J2-2G1">
+                                <rect key="frame" x="0.0" y="0.0" width="1194" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Time Slot" id="fZA-Gc-Ric"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="9OX-Cv-vnF" firstAttribute="centerX" secondItem="jJP-ST-9OB" secondAttribute="centerX" id="FV5-OB-Biv"/>
+                            <constraint firstItem="9OX-Cv-vnF" firstAttribute="leading" secondItem="Bih-If-7vh" secondAttribute="leading" id="IsY-Cl-s1I"/>
+                            <constraint firstItem="9OX-Cv-vnF" firstAttribute="top" secondItem="Bih-If-7vh" secondAttribute="top" constant="44" id="smr-Hl-Z1E"/>
+                            <constraint firstItem="9OX-Cv-vnF" firstAttribute="centerY" secondItem="jJP-ST-9OB" secondAttribute="centerY" constant="22" id="uML-iF-tcl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Bih-If-7vh"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2zr-By-4I5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1531" y="1140"/>
         </scene>
     </scenes>
 </document>

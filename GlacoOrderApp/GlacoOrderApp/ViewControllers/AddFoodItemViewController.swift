@@ -9,8 +9,9 @@
 import UIKit
 import QuartzCore
 
-class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate {
+class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate, TimeSlotPopoverControllerDelegate {
     
+    internal var timeSlots: [Int] = []
     internal var categories : [Int] = []
 
     @IBOutlet var tvDescription: UITextView!
@@ -25,7 +26,17 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func displayPopover(_ sender: UIButton) {
+    @IBAction func displayTimeSlotPopover(_ sender : UIButton) {
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "TimeSlotPopoverViewController") as! TimeSlotPopoverViewController
+        vc.modalPresentationStyle = .popover
+        vc.controllerDelegate = self
+        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+        popover.sourceView = sender
+        present(vc, animated: true, completion:nil)
+    }
+    
+    @IBAction func displayCategoryPopover(_ sender: UIButton) {
            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
            let vc = storyboard.instantiateViewController(withIdentifier: "CategoryPopoverViewController") as! CategoryPopoverViewController
            vc.modalPresentationStyle = .popover
@@ -103,5 +114,13 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     
     func removeCategory(categoryId : Int) {
         categories.remove(at: (categories.firstIndex(of: categoryId)!))
+    }
+    
+    func addTimeSlot(timeSlotId: Int) {
+        timeSlots.append(timeSlotId)
+    }
+    
+    func removeTimeSlot(timeSlotId: Int) {
+        timeSlots.remove(at: (timeSlots.firstIndex(of: timeSlotId)!))
     }
 }
