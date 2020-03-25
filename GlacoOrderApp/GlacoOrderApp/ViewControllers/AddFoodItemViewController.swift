@@ -10,9 +10,9 @@ import UIKit
 import QuartzCore
 
 class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate, TimeSlotPopoverControllerDelegate {
-    
-    internal var timeSlot : TimeSlot?
-    internal var categoryIds : [Int] = []
+
+    private var timeSlot : TimeSlot?
+    private var categories : [ItemCategory] = []
 
     @IBOutlet var tvDescription: UITextView!
     @IBOutlet var tfName: UITextField!
@@ -107,11 +107,23 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         }
     }
     
-    func addCategory(categoryId : Int) {
-        categoryIds.append(categoryId)
+    func getCategories() -> [ItemCategory] {
+        return categories
     }
     
-    func removeCategory(categoryId : Int) {
-        categoryIds.remove(at: (categoryIds.firstIndex(of: categoryId)!))
+    func addCategory(category: ItemCategory) {
+        categories.append(category)
+    }
+    
+    func removeCategory(category: ItemCategory) {
+        categories.remove(at: categories.firstIndex(where: {$0.id == category.id})!)
+    }
+    
+    func getTimeSlot() -> TimeSlot? {
+        return self.timeSlot
+    }
+    
+    func setTimeSlot(timeSlot: TimeSlot) {
+        self.timeSlot = timeSlot
     }
 }

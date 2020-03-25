@@ -10,6 +10,7 @@ import Foundation
 
 protocol TimeSlotPopoverControllerDelegate {
     
-    var timeSlot : TimeSlot? { get set }
+    func getTimeSlot() -> TimeSlot?
+    func setTimeSlot(timeSlot : TimeSlot)
     
 }

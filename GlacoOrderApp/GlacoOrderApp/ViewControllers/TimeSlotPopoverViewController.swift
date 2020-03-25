@@ -77,9 +77,9 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        if (controllerDelegate?.timeSlot != nil) {
-            if (indexPath.row == (controllerDelegate!.timeSlot?.id)! - 1) {
+        let displayCell = cell as! DatabaseIdTableViewCell
+        if (controllerDelegate?.getTimeSlot() != nil) {
+            if (displayCell.databaseId == (controllerDelegate!.getTimeSlot()?.id)!) {
                            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                    }
         }
@@ -90,7 +90,7 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
         let selectedCell = tableView.cellForRow(at: indexPath) as! DatabaseIdTableViewCell
         let selectedCellContent = selectedCell.databaseId
         
-        controllerDelegate?.timeSlot = timeSlots.first(where: { $0.id == selectedCellContent})
+        controllerDelegate?.setTimeSlot(timeSlot: timeSlots.first(where: { $0.id == selectedCellContent})!)
     }
 
 }
