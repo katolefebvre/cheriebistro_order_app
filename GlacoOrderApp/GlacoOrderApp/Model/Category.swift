@@ -1,5 +1,5 @@
 //
-//  ItemCategory.swift
+//  Category.swift
 //  GlacoOrderApp
 //
 //  Created by Parker Christie on 2020-03-10.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class ItemCategory {
+public class Category {
     var id : Int
-    var category : String
+    var name : String
     
-    init(id : Int, category: String) {
+    init(id : Int, name: String) {
         self.id = id
-        self.category = category
+        self.name = name
     }
 }

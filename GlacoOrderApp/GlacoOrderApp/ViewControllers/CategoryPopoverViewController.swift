@@ -58,7 +58,7 @@ class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UI
         let selectedCellContent = selectedCell.databaseId
         
         if !(controllerDelegate?.getCategories().contains(where: {$0.id == selectedCellContent}))! {
-            controllerDelegate?.addCategory(category: ItemCategory(id : selectedCellContent!, category: selectedCell.textLabel!.text!))
+            controllerDelegate?.addCategory(category: Category(id : selectedCellContent!, name: selectedCell.textLabel!.text!))
         }
     }
     
@@ -68,7 +68,7 @@ class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UI
         let selectedCellContent = selectedCell.databaseId
         
         if (controllerDelegate?.getCategories().contains(where: {$0.id == selectedCellContent}))! {
-            controllerDelegate?.removeCategory(category: ItemCategory(id : selectedCellContent!, category: selectedCell.textLabel!.text!))
+            controllerDelegate?.removeCategory(category: Category(id : selectedCellContent!, name: selectedCell.textLabel!.text!))
         }
         
     }

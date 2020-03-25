@@ -10,14 +10,14 @@ import Foundation
 
 public class MenuItem {
     
-    let itemId : Int
+    let id : Int
     let name : String
     let price : Float
     let availability : Bool
-    let category : ItemCategory
+    let category : Category
     
-    init(itemId: Int, name: String, price: Float, availability: Bool, category: ItemCategory) {
-        self.itemId = itemId
+    init(id: Int, name: String, price: Float, availability: Bool, category: Category) {
+        self.id = id
         self.name = name
         self.price = price
         self.availability = availability
