@@ -11,19 +11,20 @@ import UIKit
 class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var controllerDelegate : CategoryPopoverControllerDelegate?
-    var categoryIds : [String] = []
-    var categoryNames : [String] = []
-    
+    var categories : [Category] = []
     @IBOutlet var categoryTable : UITableView!
 
     override func viewDidLoad() {
-        categoryIds = ["1", "2", "3"]
-        categoryNames = ["Gluten-Free", "Vegan", "Vegetarian"]
         super.viewDidLoad()
+        self.categories = DatabaseAccess.getCategories()
+        
+        DispatchQueue.main.async {
+            self.categoryTable.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryIds.count
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -31,14 +32,14 @@ class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell : DatabaseIdTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "time_slot") as? DatabaseIdTableViewCell ?? DatabaseIdTableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: "time_slot")
+        let tableCell : DatabaseIdTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "category") as? DatabaseIdTableViewCell ?? DatabaseIdTableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: "category")
         
         let cellBackgroundView = UIView()
         cellBackgroundView.backgroundColor = .systemBlue
         
         tableCell?.textLabel?.font = UIFont.systemFont(ofSize: 24)
-        tableCell?.textLabel?.text = categoryNames[indexPath.row]
-        tableCell?.databaseId = (Int)(categoryIds[indexPath.row])
+        tableCell?.textLabel?.text = categories[indexPath.row].name
+        tableCell?.databaseId = (Int)(categories[indexPath.row].id)
         tableCell?.selectedBackgroundView = cellBackgroundView
         
         return tableCell!
