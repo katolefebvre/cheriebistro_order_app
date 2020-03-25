@@ -20,6 +20,7 @@
 		CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92833824181415009830A9 /* AddFoodItemViewController.swift */; };
 		CD92833C241815E9009830A9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92833B241815E9009830A9 /* QuartzCore.framework */; };
 		CDAD18B32419535700718E2F /* CategoryPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */; };
+		CDBA97E9242AE3350050F272 /* DatabaseIdTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBA97E8242AE3350050F272 /* DatabaseIdTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		CD92833824181415009830A9 /* AddFoodItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodItemViewController.swift; sourceTree = "<group>"; };
 		CD92833B241815E9009830A9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPopoverViewController.swift; sourceTree = "<group>"; };
+		CDBA97E8242AE3350050F272 /* DatabaseIdTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseIdTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				CD92833324181003009830A9 /* MenuItem.swift */,
 				CD928335241810D8009830A9 /* ItemCategory.swift */,
 				CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */,
+				CDBA97E8242AE3350050F272 /* DatabaseIdTableViewCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */,
 				CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */,
 				CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */,
+				CDBA97E9242AE3350050F272 /* DatabaseIdTableViewCell.swift in Sources */,
 				CDAD18B32419535700718E2F /* CategoryPopoverViewController.swift in Sources */,
 				CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */,
 			);
