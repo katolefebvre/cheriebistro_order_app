@@ -14,14 +14,14 @@ public class MenuItem {
     let name : String
     let price : Float
     let availability : Bool
-    let categoery : ItemCategory
+    let category : ItemCategory
     
-    init(itemId: Int, name: String, price: Float, availability: Bool, categoery: ItemCategory) {
+    init(itemId: Int, name: String, price: Float, availability: Bool, category: ItemCategory) {
         self.itemId = itemId
         self.name = name
         self.price = price
         self.availability = availability
-        self.categoery = categoery
+        self.category = category
     }
     
     

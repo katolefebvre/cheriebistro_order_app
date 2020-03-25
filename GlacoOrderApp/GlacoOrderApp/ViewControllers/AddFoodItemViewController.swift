@@ -11,8 +11,8 @@ import QuartzCore
 
 class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate, TimeSlotPopoverControllerDelegate {
     
-    internal var timeSlot: Int = 0
-    internal var categories : [Int] = []
+    internal var timeSlot : TimeSlot?
+    internal var categoryIds : [Int] = []
 
     @IBOutlet var tvDescription: UITextView!
     @IBOutlet var tfName: UITextField!
@@ -66,7 +66,7 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         
         var dataString = "name=\(tfName.text!)"
         dataString = dataString + "&description=\(tvDescription.text!)"
-        dataString = dataString + "&time_slot_id=\(timeSlot)"
+        dataString = dataString + "&time_slot_id=\(timeSlot?.id ?? 0)"
         dataString = dataString + "&price=\(tfPrice.text!)"
         
         let dataD = dataString.data(using: .utf8)
@@ -108,10 +108,10 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     }
     
     func addCategory(categoryId : Int) {
-        categories.append(categoryId)
+        categoryIds.append(categoryId)
     }
     
     func removeCategory(categoryId : Int) {
-        categories.remove(at: (categories.firstIndex(of: categoryId)!))
+        categoryIds.remove(at: (categoryIds.firstIndex(of: categoryId)!))
     }
 }

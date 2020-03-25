@@ -10,6 +10,6 @@ import Foundation
 
 protocol TimeSlotPopoverControllerDelegate {
     
-    var timeSlot : Int { get set }
+    var timeSlot : TimeSlot? { get set }
     
 }

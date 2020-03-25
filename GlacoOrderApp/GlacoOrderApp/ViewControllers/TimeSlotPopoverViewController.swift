@@ -12,8 +12,7 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
 
     @IBOutlet var timeSlotTable: UITableView!
     var controllerDelegate : TimeSlotPopoverControllerDelegate?
-    var timeSlotNames : [String] = []
-    var timeSlotIds : [String] = []
+    var timeSlots : [TimeSlot] = []
 
     override func viewDidLoad() {
         getTimeSlots()
@@ -21,7 +20,7 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timeSlotNames.count
+        return timeSlots.count
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -48,8 +47,7 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
                 
                 for timeslot in timeslotArray {
                     if let ts = timeslot as? [String: Any] {
-                        self.timeSlotIds.append(ts["id"]! as! String)
-                        self.timeSlotNames.append(ts["name"]! as! String)
+                        self.timeSlots.append(TimeSlot(id: Int(ts["id"]! as! String)!, name: ts["name"]! as! String))
                     }
                 }
                 
@@ -71,8 +69,8 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
         cellBackgroundView.backgroundColor = .systemBlue
         
         tableCell?.textLabel?.font = UIFont.systemFont(ofSize: 25)
-        tableCell?.textLabel?.text = timeSlotNames[indexPath.row]
-        tableCell?.databaseId = (Int)(timeSlotIds[indexPath.row])
+        tableCell?.textLabel?.text = timeSlots[indexPath.row].name
+        tableCell?.databaseId = timeSlots[indexPath.row].id
         tableCell?.selectedBackgroundView = cellBackgroundView
         
         return tableCell!
@@ -80,8 +78,10 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if (indexPath.row == controllerDelegate!.timeSlot - 1) {
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        if (controllerDelegate?.timeSlot != nil) {
+            if (indexPath.row == (controllerDelegate!.timeSlot?.id)! - 1) {
+                           tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                   }
         }
     }
 
@@ -90,7 +90,7 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
         let selectedCell = tableView.cellForRow(at: indexPath) as! DatabaseIdTableViewCell
         let selectedCellContent = selectedCell.databaseId
         
-        controllerDelegate?.timeSlot = selectedCellContent!
+        controllerDelegate?.timeSlot = timeSlots.first(where: { $0.id == selectedCellContent})
     }
 
 }

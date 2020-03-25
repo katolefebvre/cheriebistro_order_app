@@ -8,6 +8,12 @@
 
 import Foundation
 
-public enum ItemCategory {
-    case drink, appetizer, entree, dessert, lunch, dinner, brunch
+public class ItemCategory {
+    var id : Int
+    var category : String
+    
+    init(id : Int, category: String) {
+        self.id = id
+        self.category = category
+    }
 }

@@ -11,6 +11,7 @@
 		CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */; };
 		CD815987242BA24A00501365 /* TimeSlotPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */; };
 		CD815989242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD815988242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift */; };
+		CD81598B242BB77500501365 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD81598A242BB77500501365 /* TimeSlot.swift */; };
 		CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92831E24180F54009830A9 /* AppDelegate.swift */; };
 		CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92832024180F54009830A9 /* SceneDelegate.swift */; };
 		CD92832324180F54009830A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92832224180F54009830A9 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 		CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCategoryViewController.swift; sourceTree = "<group>"; };
 		CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotPopoverViewController.swift; sourceTree = "<group>"; };
 		CD815988242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotPopoverControllerDelegate.swift; sourceTree = "<group>"; };
+		CD81598A242BB77500501365 /* TimeSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		CD92831B24180F54009830A9 /* GlacoOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlacoOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92831E24180F54009830A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD92832024180F54009830A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		CD92833224180F86009830A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CD81598A242BB77500501365 /* TimeSlot.swift */,
 				CD92831E24180F54009830A9 /* AppDelegate.swift */,
 				CD92832024180F54009830A9 /* SceneDelegate.swift */,
 				CD92833324181003009830A9 /* MenuItem.swift */,
@@ -208,6 +211,7 @@
 				CD928336241810D8009830A9 /* ItemCategory.swift in Sources */,
 				CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */,
 				CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */,
+				CD81598B242BB77500501365 /* TimeSlot.swift in Sources */,
 				CD815987242BA24A00501365 /* TimeSlotPopoverViewController.swift in Sources */,
 				CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */,
 				CDBA97E9242AE3350050F272 /* DatabaseIdTableViewCell.swift in Sources */,

@@ -10,7 +10,7 @@ import Foundation
 
 public protocol CategoryPopoverControllerDelegate {
     
-    var categories : [Int] { get set }
+    var categoryIds : [Int] { get set }
     
     func addCategory(categoryId : Int)
     func removeCategory(categoryId : Int)

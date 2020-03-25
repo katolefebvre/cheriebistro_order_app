@@ -47,7 +47,7 @@ class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let foundCell : DatabaseIdTableViewCell = cell as! DatabaseIdTableViewCell
         
-        if (controllerDelegate?.categories.contains(foundCell.databaseId!))! {
+        if (controllerDelegate?.categoryIds.contains(foundCell.databaseId!))! {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
@@ -57,7 +57,7 @@ class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UI
         let selectedCell = tableView.cellForRow(at: indexPath) as! DatabaseIdTableViewCell
         let selectedCellContent = selectedCell.databaseId
         
-        if !(controllerDelegate?.categories.contains(selectedCellContent!))! {
+        if !(controllerDelegate?.categoryIds.contains(selectedCellContent!))! {
             controllerDelegate?.addCategory(categoryId: selectedCellContent!)
         }
     }
@@ -67,7 +67,7 @@ class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UI
         let selectedCell = tableView.cellForRow(at: indexPath) as! DatabaseIdTableViewCell
         let selectedCellContent = selectedCell.databaseId
         
-        if (controllerDelegate?.categories.contains(selectedCellContent!))! {
+        if (controllerDelegate?.categoryIds.contains(selectedCellContent!))! {
             controllerDelegate?.removeCategory(categoryId: selectedCellContent!)
         }
         

@@ -10,12 +10,12 @@ import UIKit
 
 class TimeSlot: NSObject {
 
-    var id: String?
+    var id: Int?
     var name: String?
     
     override init() {}
     
-    init(id: String, name: String) {
+    init(id: Int, name: String) {
         self.id = id
         self.name = name
     }
