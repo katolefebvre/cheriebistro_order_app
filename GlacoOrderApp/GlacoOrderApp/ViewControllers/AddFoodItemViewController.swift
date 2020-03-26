@@ -10,10 +10,19 @@ import UIKit
 import QuartzCore
 
 /// ViewController for the page for adding new MenuItems to the application.
-class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDelegate, TimeSlotPopoverControllerDelegate {
+class AddFoodItemViewController: UIViewController, UITextFieldDelegate, CategoryPopoverControllerDelegate, TimeSlotPopoverControllerDelegate {
     
     /// The currently selected TimeSlot for the MenuItem to be added.
-    private var timeSlot : TimeSlot?
+    private var timeSlot : TimeSlot? {
+        didSet {
+            if timeSlot != nil && !tfName.text!.isEmpty && !tfPrice.text!.isEmpty {
+                submitButton.isEnabled = true
+            }
+            else {
+                submitButton.isEnabled = false
+            }
+        }
+    }
     
     /// The currenty selected categories for the MenuItem to be added.
     private var categories : [Category] = []
@@ -27,11 +36,35 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     /// The price of the Menuitem.
     @IBOutlet var tfPrice: UITextField!
     
+    @IBOutlet var submitButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        submitButton.isEnabled = false
         tvDescription.layer.borderWidth = 0.5
         tvDescription.layer.cornerRadius = 5
         tvDescription.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == tfPrice {
+            let isNumber = CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: string))
+            let withDecimal = (
+                string == NumberFormatter().decimalSeparator &&
+                textField.text?.contains(string) == false
+            )
+            return isNumber || withDecimal
+        }
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if timeSlot != nil && !tfName.text!.isEmpty && !tfPrice.text!.isEmpty {
+            submitButton.isEnabled = true
+        }
+        else {
+            submitButton.isEnabled = false
+        }
     }
     
     
@@ -64,27 +97,36 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
     /// Prepares a food item to be stored in the database and sends the request to DatabaseAccess.
     /// - Parameter sender: The element triggering the submit action.
     @IBAction func submitAddFoodItem(_ sender: Any) {
-        let alertBox = UIAlertController(title: "Add Food Item", message: "Are you sure you want to add \(tfName.text!) to the menu?", preferredStyle: .alert)
-        
-        let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let yesAction = UIAlertAction(title: "Confirm", style: .default, handler: { (alert) in
+        if (timeSlot == nil) {
+            let alertBox = UIAlertController(title: "Error", message: "Please select a time slot for the item.", preferredStyle: .alert)
             
-            let response : [String : String] = DatabaseAccess.addMenuItem(name: self.tfName.text!, description: self.tvDescription.text!, timeslotID: self.timeSlot!.id!, price: self.tfPrice.text!, categoryIds: self.categories.map {$0.id})
-            if response["error"] == "false" {
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Upload Successful", message: "Menu item added successfully.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+            let yesAction = UIAlertAction(title: "Confirm", style: .cancel)
+            alertBox.addAction(yesAction)
+            self.present(alertBox, animated: true, completion: nil)
+        }
+        else {
+            let alertBox = UIAlertController(title: "Add Food Item", message: "Are you sure you want to add \(tfName.text!) to the menu?", preferredStyle: .alert)
+            
+            let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let yesAction = UIAlertAction(title: "Confirm", style: .default, handler: { (alert) in
+                
+                let response : [String : String] = DatabaseAccess.addMenuItem(name: self.tfName.text!, description: self.tvDescription.text!, timeslotID: self.timeSlot!.id!, price: self.tfPrice.text!, categoryIds: self.categories.map {$0.id})
+                if response["error"] == "false" {
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Upload Successful", message: "Menu item added successfully.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    self.showError(message: "Menu item failed to upload.")
                 }
-            } else {
-                self.showError(message: "Menu item failed to upload.")
-            }
-        })
-        
-        alertBox.addAction(noAction)
-        alertBox.addAction(yesAction)
-        
-        self.present(alertBox, animated: true, completion: nil)
+            })
+            
+            alertBox.addAction(noAction)
+            alertBox.addAction(yesAction)
+            
+            self.present(alertBox, animated: true, completion: nil)
+        }
     }
     
     
