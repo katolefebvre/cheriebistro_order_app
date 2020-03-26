@@ -127,7 +127,7 @@ class DatabaseAccess {
         return results
     }
     
-    class func addMenuItem(name: String, description: String, timeslotID: Int, price: String) -> [String : String] {
+    class func addMenuItem(name: String, description: String, timeslotID: Int, price: String, categoryIds : [Int]) -> [String : String] {
         var responseArray : [String : String] = [:]
         
         let address = URL(string: "http://142.55.32.86:50131/cheriebistro/api/addfooditem.php")!
@@ -139,6 +139,10 @@ class DatabaseAccess {
         dataString = dataString + "&description=\(description)"
         dataString = dataString + "&time_slot_id=\(timeslotID)"
         dataString = dataString + "&price=\(price)"
+        
+        let stringCategoryIds = categoryIds.map {String($0)}
+        let serializedCategoryIds = stringCategoryIds.joined(separator: ",")
+        dataString = dataString + "&category_ids=\(serializedCategoryIds)"
         
         let dataD = dataString.data(using: .utf8)
         

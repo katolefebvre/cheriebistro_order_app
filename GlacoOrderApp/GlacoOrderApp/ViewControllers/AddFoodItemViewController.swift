@@ -50,7 +50,8 @@ class AddFoodItemViewController: UIViewController, CategoryPopoverControllerDele
         
         let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let yesAction = UIAlertAction(title: "Confirm", style: .default, handler: { (alert) in
-            let response : [String : String] = DatabaseAccess.addMenuItem(name: self.tfName.text!, description: self.tvDescription.text!, timeslotID: self.timeSlot!.id!, price: self.tfPrice.text!)
+            
+            let response : [String : String] = DatabaseAccess.addMenuItem(name: self.tfName.text!, description: self.tvDescription.text!, timeslotID: self.timeSlot!.id!, price: self.tfPrice.text!, categoryIds: self.categories.map {$0.id})
             if response["error"] == "false" {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Upload Successful", message: "Menu item added successfully.", preferredStyle: .alert)
