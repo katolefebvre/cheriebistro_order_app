@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A delegate for the CategoryPopoverViewController
 public protocol CategoryPopoverControllerDelegate {
     
     func getCategories() -> [Category]

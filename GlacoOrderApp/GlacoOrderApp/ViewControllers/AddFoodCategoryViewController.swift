@@ -10,7 +10,6 @@ import UIKit
 
 class AddFoodCategoryViewController: UIViewController {
     
-    
     @IBOutlet var categoryTextField: UITextField!
     @IBOutlet var addCategoryButton: UIButton!
     
@@ -18,6 +17,7 @@ class AddFoodCategoryViewController: UIViewController {
         super.viewDidLoad()
         addCategoryButton.isEnabled = false
     }
+    
     
     @IBAction func onCateogryTextFieldChange(_ sender: Any) {
         let checkString : String = (categoryTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines))!

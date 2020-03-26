@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A delegate for the TimeSlotPopoverViewController
 protocol TimeSlotPopoverControllerDelegate {
     
     func getTimeSlot() -> TimeSlot?

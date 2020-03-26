@@ -9,7 +9,11 @@
 import Foundation
 
 public class Category {
+    
+    /// The ID of the category.
     var id : Int
+    
+    /// The name of the category.
     var name : String
     
     init(id : Int, name: String) {

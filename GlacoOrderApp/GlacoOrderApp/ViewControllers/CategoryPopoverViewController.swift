@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// ViewController for the CategoryPopover
 class CategoryPopoverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    /// The current CategoryPopoverDelegate
     var controllerDelegate : CategoryPopoverControllerDelegate?
     var categories : [Category] = []
     @IBOutlet var categoryTable : UITableView!

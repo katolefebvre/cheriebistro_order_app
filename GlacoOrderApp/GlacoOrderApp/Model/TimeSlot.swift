@@ -9,8 +9,11 @@
 import UIKit
 
 class TimeSlot: NSObject {
-
+    
+    /// The ID of the TimeSlot.
     var id: Int?
+    
+    /// The Name of the TimeSlot.
     var name: String?
     
     override init() {}

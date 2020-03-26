@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A custom TableViewCell that stores a database ID as a parameter to be accessed by anyone.
 class DatabaseIdTableViewCell: UITableViewCell {
     
     public var databaseId : Int?

@@ -8,8 +8,10 @@
 
 import Foundation
 
+/// Represents the connection between the application and the PHP API.
 class DatabaseAccess {
     
+    /// Retrieves all of the TimeSlots stored in the database and returns them.
     class func getTimeSlots() -> [TimeSlot] {
         var results : [TimeSlot] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/gettimeslots.php")!
@@ -46,6 +48,7 @@ class DatabaseAccess {
         return results
     }
     
+    /// Retrieves all of the Categories stored in the database and returns them.
     class func getCategories() -> [Category] {
         var results : [Category] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/getcategories.php")!
@@ -82,6 +85,8 @@ class DatabaseAccess {
         return results
     }
     
+    
+    /// Retrieves all of the MenuItems stored in the database and returns them.
     class func getMenuItems() -> [MenuItem] {
         var results: [MenuItem] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/getmenuitems.php")!
@@ -127,6 +132,14 @@ class DatabaseAccess {
         return results
     }
     
+    
+    /// Sends a request to add a MenuItem to the database
+    /// - Parameters:
+    ///   - name: Name of the MenuItem.
+    ///   - description: Description of the MenuItem.
+    ///   - timeslotID: Selected TimeSlot ID of the MenuItem.
+    ///   - price: Price of the MenuItem.
+    ///   - categoryIds: List of category IDs of the MenuItem.
     class func addMenuItem(name: String, description: String, timeslotID: Int, price: String, categoryIds : [Int]) -> [String : String] {
         var responseArray : [String : String] = [:]
         
