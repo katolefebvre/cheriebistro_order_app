@@ -15,7 +15,7 @@
 		CD81598B242BB77500501365 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD81598A242BB77500501365 /* TimeSlot.swift */; };
 		CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92831E24180F54009830A9 /* AppDelegate.swift */; };
 		CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92832024180F54009830A9 /* SceneDelegate.swift */; };
-		CD92832324180F54009830A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92832224180F54009830A9 /* ViewController.swift */; };
+		CD92832324180F54009830A9 /* AdminLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD92832224180F54009830A9 /* AdminLandingViewController.swift */; };
 		CD92832624180F54009830A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD92832424180F54009830A9 /* Main.storyboard */; };
 		CD92832824180F54009830A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD92832724180F54009830A9 /* Assets.xcassets */; };
 		CD92832B24180F54009830A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD92832924180F54009830A9 /* LaunchScreen.storyboard */; };
@@ -37,7 +37,7 @@
 		CD92831B24180F54009830A9 /* GlacoOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlacoOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD92831E24180F54009830A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD92832024180F54009830A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CD92832224180F54009830A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CD92832224180F54009830A9 /* AdminLandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLandingViewController.swift; sourceTree = "<group>"; };
 		CD92832524180F54009830A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD92832724180F54009830A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD92832A24180F54009830A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 		CD928337241813FF009830A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CD92832224180F54009830A9 /* ViewController.swift */,
+				CD92832224180F54009830A9 /* AdminLandingViewController.swift */,
 				CD92833824181415009830A9 /* AddFoodItemViewController.swift */,
 				CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */,
 				CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */,
@@ -215,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD92832324180F54009830A9 /* ViewController.swift in Sources */,
+				CD92832324180F54009830A9 /* AdminLandingViewController.swift in Sources */,
 				CD815989242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift in Sources */,
 				CD92833424181003009830A9 /* MenuItem.swift in Sources */,
 				CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */,

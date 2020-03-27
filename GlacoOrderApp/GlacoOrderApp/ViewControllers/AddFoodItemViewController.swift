@@ -110,7 +110,9 @@ class AddFoodItemViewController: UIViewController, UITextFieldDelegate, Category
             let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             let yesAction = UIAlertAction(title: "Confirm", style: .default, handler: { (alert) in
                 
-                let response : [String : String] = DatabaseAccess.addMenuItem(name: self.tfName.text!, description: self.tvDescription.text!, timeslotID: self.timeSlot!.id!, price: self.tfPrice.text!, categoryIds: self.categories.map {$0.id})
+                let menuItem = MenuItem(id: nil, name: self.tfName.text!, description: self.tvDescription.text!, price: (self.tfPrice.text! as NSString).floatValue, timeslot: self.timeSlot!, categories: self.categories)
+                
+                let response : [String : String] = DatabaseAccess.addMenuItem(menuItem: menuItem)
                 if response["error"] == "false" {
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "Upload Successful", message: "Menu item added successfully.", preferredStyle: .alert)

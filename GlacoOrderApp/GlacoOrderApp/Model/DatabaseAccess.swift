@@ -16,6 +16,7 @@ class DatabaseAccess {
         var results : [TimeSlot] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/gettimeslots.php")!
         let request = NSMutableURLRequest(url: url)
+        request.timeoutInterval = 10
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value: 0)
         
@@ -44,7 +45,7 @@ class DatabaseAccess {
         }
         
         task.resume()
-        _ = semaphore.wait(wallTimeout: .distantFuture)
+        _ = semaphore.wait(timeout: .distantFuture)
         return results
     }
     
@@ -53,6 +54,7 @@ class DatabaseAccess {
         var results : [Category] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/getcategories.php")!
         let request = NSMutableURLRequest(url: url)
+        request.timeoutInterval = 10
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value: 0)
         
@@ -81,56 +83,56 @@ class DatabaseAccess {
         }
         
         task.resume()
-        _ = semaphore.wait(wallTimeout: .distantFuture)
+        _ = semaphore.wait(wallTimeout: .distantFuture())
         return results
     }
     
     
     /// Retrieves all of the MenuItems stored in the database and returns them.
-    class func getMenuItems() -> [MenuItem] {
-        var results: [MenuItem] = []
-        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/getmenuitems.php")!
-        let request = NSMutableURLRequest(url: url)
-        request.httpMethod = "GET"
-        let semaphore = DispatchSemaphore(value: 0)
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest) {
-            data, response, error in
-            
-            if error != nil {
-                print("error")
-                return
-            }
-            
-            do {
-                var menuitemJSON : NSDictionary!
-                menuitemJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                let menuitemArray : NSArray = menuitemJSON["menu_items"] as! NSArray
-                
-                for menuitem in menuitemArray {
-                    if let mi = menuitem as? [String : Any] {
-                        results.append(MenuItem(
-                            id: Int(mi["id"]! as! String)!,
-                            name: mi["name"]! as! String,
-                            description: mi["description"]! as! String,
-                            price: Float(mi["price"]! as! String)!,
-                            timeslot: TimeSlot(
-                                id: Int(mi["time_slot_id"]! as! String)!,
-                                name: "Sunrise Breakfast" // hard coded for now
-                            )
-                        ))
-                    }
-                }
-            } catch {
-                print(error)
-            }
-            semaphore.signal()
-        }
-        
-        task.resume()
-        _ = semaphore.wait(wallTimeout: .distantFuture)
-        return results
-    }
+//    class func getMenuItems() -> [MenuItem] {
+//        var results: [MenuItem] = []
+//        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/getmenuitems.php")!
+//        let request = NSMutableURLRequest(url: url)
+//        request.httpMethod = "GET"
+//        let semaphore = DispatchSemaphore(value: 0)
+//
+//        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+//            data, response, error in
+//
+//            if error != nil {
+//                print("error")
+//                return
+//            }
+//
+//            do {
+//                var menuitemJSON : NSDictionary!
+//                menuitemJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+//                let menuitemArray : NSArray = menuitemJSON["menu_items"] as! NSArray
+//                
+//                for menuitem in menuitemArray {
+//                    if let mi = menuitem as? [String : Any] {
+//                        results.append(MenuItem(
+//                            id: Int(mi["id"]! as! String)!,
+//                            name: mi["name"]! as! String,
+//                            description: mi["description"]! as! String,
+//                            price: Float(mi["price"]! as! String)!,
+//                            timeslot: TimeSlot(
+//                                id: Int(mi["time_slot_id"]! as! String)!,
+//                                name: "Sunrise Breakfast" // hard coded for now
+//                            )
+//                        ))
+//                    }
+//                }
+//            } catch {
+//                print(error)
+//            }
+//            semaphore.signal()
+//        }
+//
+//        task.resume()
+//        _ = semaphore.wait(wallTimeout: .distantFuture)
+//        return results
+//    }
     
     
     /// Sends a request to add a MenuItem to the database
@@ -140,7 +142,7 @@ class DatabaseAccess {
     ///   - timeslotID: Selected TimeSlot ID of the MenuItem.
     ///   - price: Price of the MenuItem.
     ///   - categoryIds: List of category IDs of the MenuItem.
-    class func addMenuItem(name: String, description: String, timeslotID: Int, price: String, categoryIds : [Int]) -> [String : String] {
+    class func addMenuItem(menuItem : MenuItem) -> [String : String] {
         var responseArray : [String : String] = [:]
         
         let address = URL(string: "http://142.55.32.86:50131/cheriebistro/api/addfooditem.php")!
@@ -148,12 +150,12 @@ class DatabaseAccess {
         url.httpMethod = "POST"
         let semaphore = DispatchSemaphore(value: 0)
         
-        var dataString = "name=\(name)"
-        dataString = dataString + "&description=\(description)"
-        dataString = dataString + "&time_slot_id=\(timeslotID)"
-        dataString = dataString + "&price=\(price)"
+        var dataString = "name=\(menuItem.name)"
+        dataString = dataString + "&description=\(menuItem.description)"
+        dataString = dataString + "&time_slot_id=\(menuItem.timeslot.id ?? 1)"
+        dataString = dataString + "&price=\(menuItem.price)"
         
-        let stringCategoryIds = categoryIds.map {String($0)}
+        let stringCategoryIds = menuItem.categories.map {String($0.id)}
         let serializedCategoryIds = stringCategoryIds.joined(separator: ",")
         dataString = dataString + "&category_ids=\(serializedCategoryIds)"
         

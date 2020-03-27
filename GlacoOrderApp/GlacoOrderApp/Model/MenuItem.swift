@@ -11,7 +11,7 @@ import Foundation
 public class MenuItem {
     
     /// The ID of the MenuItem
-    let id : Int
+    let id : Int?
     
     /// The Name of the MenuItem
     let name : String
@@ -24,15 +24,17 @@ public class MenuItem {
     
     /// The TimeSlot of the MenuItem
     let timeslot : TimeSlot
-//    let categories : [Category]
     
-    init(id: Int, name: String, description: String, price: Float, timeslot: TimeSlot) {
+    /// The Categories of the MenuItem
+    let categories : [Category]
+    
+    init(id: Int?, name: String, description: String, price: Float, timeslot: TimeSlot, categories : [Category]) {
         self.id = id
         self.name = name
         self.description = description
         self.price = price
         self.timeslot = timeslot
-//        self.categories = categories
+        self.categories = categories
     }
     
     
