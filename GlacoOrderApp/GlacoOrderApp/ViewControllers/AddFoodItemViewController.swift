@@ -15,12 +15,7 @@ class AddFoodItemViewController: UIViewController, UITextFieldDelegate, Category
     /// The currently selected TimeSlot for the MenuItem to be added.
     private var timeSlot : TimeSlot? {
         didSet {
-            if timeSlot != nil && !tfName.text!.isEmpty && !tfPrice.text!.isEmpty {
-                submitButton.isEnabled = true
-            }
-            else {
-                submitButton.isEnabled = false
-            }
+            checkRequiredInputValidity()
         }
     }
     
@@ -59,12 +54,7 @@ class AddFoodItemViewController: UIViewController, UITextFieldDelegate, Category
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if timeSlot != nil && !tfName.text!.isEmpty && !tfPrice.text!.isEmpty {
-            submitButton.isEnabled = true
-        }
-        else {
-            submitButton.isEnabled = false
-        }
+        checkRequiredInputValidity()
     }
     
     
@@ -173,5 +163,14 @@ class AddFoodItemViewController: UIViewController, UITextFieldDelegate, Category
     /// - Parameter timeSlot: The TimeSlot to be stored.
     func setTimeSlot(timeSlot: TimeSlot) {
         self.timeSlot = timeSlot
+    }
+    
+    private func checkRequiredInputValidity() {
+        if timeSlot != nil && !tfName.text!.isEmpty && !tfPrice.text!.isEmpty {
+            submitButton.isEnabled = true
+        }
+        else {
+            submitButton.isEnabled = false
+        }
     }
 }

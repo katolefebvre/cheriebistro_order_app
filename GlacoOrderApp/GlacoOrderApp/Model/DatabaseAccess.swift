@@ -83,7 +83,7 @@ class DatabaseAccess {
         }
         
         task.resume()
-        _ = semaphore.wait(wallTimeout: .distantFuture())
+        _ = semaphore.wait(wallTimeout: .distantFuture)
         return results
     }
     
