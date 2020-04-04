@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7DF49536242BDE8F00AF3B64 /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF49535242BDE8F00AF3B64 /* DatabaseAccess.swift */; };
-		AE30182F24378DC500037289 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE30182E24378DC500037289 /* LoginViewController.swift */; };
 		CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */; };
 		CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */; };
 		CD815987242BA24A00501365 /* TimeSlotPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		7DF49535242BDE8F00AF3B64 /* DatabaseAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseAccess.swift; sourceTree = "<group>"; };
-		AE30182E24378DC500037289 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPopoverControllerDelegate.swift; sourceTree = "<group>"; };
 		CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCategoryViewController.swift; sourceTree = "<group>"; };
 		CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotPopoverViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 				CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */,
 				CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */,
 				CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */,
-				AE30182E24378DC500037289 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -221,7 +218,6 @@
 				CD92832324180F54009830A9 /* ViewController.swift in Sources */,
 				CD815989242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift in Sources */,
 				CD92833424181003009830A9 /* MenuItem.swift in Sources */,
-				AE30182F24378DC500037289 /* LoginViewController.swift in Sources */,
 				CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */,
 				CD928336241810D8009830A9 /* Category.swift in Sources */,
 				CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */,

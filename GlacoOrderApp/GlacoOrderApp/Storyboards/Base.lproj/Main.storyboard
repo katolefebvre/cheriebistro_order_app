@@ -16,64 +16,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="eNq-kd-Tr0" kind="relationship" relationship="rootViewController" id="0tv-fr-y8P"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dwL-gr-X3E"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I92-ZS-SRI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1193" y="137"/>
-        </scene>
-        <!--Login View Controller-->
-        <scene sceneID="jsT-Ic-9wW">
-            <objects>
-                <viewController id="eNq-kd-Tr0" customClass="LoginViewController" customModule="GlacoOrderApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eaS-e2-egO">
-                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mm5-jp-7tu">
-                                <rect key="frame" x="0.0" y="0.0" width="1194" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Login" id="AjK-ta-uCC">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="B4n-OS-XMw"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KBN-CW-4Jl">
-                                <rect key="frame" x="466" y="281" width="262" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EmployeeID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpL-Pb-cy8">
-                                <rect key="frame" x="466" y="245" width="119" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKc-aP-CEL">
-                                <rect key="frame" x="578" y="385" width="38" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login"/>
-                                <connections>
-                                    <action selector="loginButtonTapped:" destination="eNq-kd-Tr0" eventType="touchUpInside" id="1hD-QZ-EHt"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="C2z-iL-lZW"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="CBw-S2-dwK"/>
-                    <connections>
-                        <outlet property="tfID" destination="KBN-CW-4Jl" id="ypa-0G-0cV"/>
-                        <segue destination="BYZ-38-t0r" kind="push" identifier="loginView" id="hTW-hp-tLA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zVs-No-UPG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-524.1206030150754" y="136.69064748201438"/>
+            <point key="canvasLocation" x="-681" y="138"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
