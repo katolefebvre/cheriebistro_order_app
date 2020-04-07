@@ -222,7 +222,7 @@ class DatabaseAccess {
                     if(response == "Success")
                     {
                         
-                        let employeeId : Int = Int(LoginJSON["employeeID"] as! String)!
+                        let employeeId : String = LoginJSON["employeeID"] as! String
                         let employeeName : String = LoginJSON["employeeName"] as! String
                         
                         employee = Employee(id: employeeId, name: employeeName)

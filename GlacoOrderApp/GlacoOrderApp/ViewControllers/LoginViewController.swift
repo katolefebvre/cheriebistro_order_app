@@ -41,9 +41,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return count <= 10
     }
     
-    @IBAction func loginButtonTapped(_ sender: AnyObject) {
+    @IBAction func loginButtonPressed(_ sender: AnyObject) {
         
-        //Textfields
         let employeeID = idTextField.text;
         
         if employeeID!.isEmpty
