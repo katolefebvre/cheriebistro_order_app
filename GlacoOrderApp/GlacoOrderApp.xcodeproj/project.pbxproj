@@ -11,6 +11,8 @@
 		AE30182F24378DC500037289 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE30182E24378DC500037289 /* LoginViewController.swift */; };
 		CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */; };
 		CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */; };
+		CD47FAFA243CDDD30004ED31 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD47FAF9243CDDD30004ED31 /* Employee.swift */; };
+		CD47FAFD243CEB1B0004ED31 /* cherieBistroLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = CD47FAFC243CEB1B0004ED31 /* cherieBistroLogo.png */; };
 		CD815987242BA24A00501365 /* TimeSlotPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */; };
 		CD815989242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD815988242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift */; };
 		CD81598B242BB77500501365 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD81598A242BB77500501365 /* TimeSlot.swift */; };
@@ -33,6 +35,8 @@
 		AE30182E24378DC500037289 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPopoverControllerDelegate.swift; sourceTree = "<group>"; };
 		CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCategoryViewController.swift; sourceTree = "<group>"; };
+		CD47FAF9243CDDD30004ED31 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		CD47FAFC243CEB1B0004ED31 /* cherieBistroLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cherieBistroLogo.png; sourceTree = "<group>"; };
 		CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotPopoverViewController.swift; sourceTree = "<group>"; };
 		CD815988242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotPopoverControllerDelegate.swift; sourceTree = "<group>"; };
 		CD81598A242BB77500501365 /* TimeSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
@@ -75,6 +79,14 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		CD47FAFB243CEB100004ED31 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				CD47FAFC243CEB1B0004ED31 /* cherieBistroLogo.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		CD815985242BA20A00501365 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +116,7 @@
 		CD92831D24180F54009830A9 /* GlacoOrderApp */ = {
 			isa = PBXGroup;
 			children = (
+				CD47FAFB243CEB100004ED31 /* Images */,
 				CD815985242BA20A00501365 /* Storyboards */,
 				CD928337241813FF009830A9 /* ViewControllers */,
 				CD92833224180F86009830A9 /* Model */,
@@ -122,6 +135,7 @@
 				CD928335241810D8009830A9 /* Category.swift */,
 				7DF49535242BDE8F00AF3B64 /* DatabaseAccess.swift */,
 				CDBA97E8242AE3350050F272 /* DatabaseIdTableViewCell.swift */,
+				CD47FAF9243CDDD30004ED31 /* Employee.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -208,6 +222,7 @@
 				CD92832B24180F54009830A9 /* LaunchScreen.storyboard in Resources */,
 				CD92832824180F54009830A9 /* Assets.xcassets in Resources */,
 				CD92832624180F54009830A9 /* Main.storyboard in Resources */,
+				CD47FAFD243CEB1B0004ED31 /* cherieBistroLogo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +242,7 @@
 				CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */,
 				CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */,
 				CD81598B242BB77500501365 /* TimeSlot.swift in Sources */,
+				CD47FAFA243CDDD30004ED31 /* Employee.swift in Sources */,
 				CD815987242BA24A00501365 /* TimeSlotPopoverViewController.swift in Sources */,
 				CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */,
 				7DF49536242BDE8F00AF3B64 /* DatabaseAccess.swift in Sources */,

@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 /// Represents the connection between the application and the PHP API.
 class DatabaseAccess {
+    
+    let mainDelegate = UIApplication.shared.delegate
     
     /// Retrieves all of the TimeSlots stored in the database and returns them.
     class func getTimeSlots() -> [TimeSlot] {
@@ -186,5 +189,56 @@ class DatabaseAccess {
         
         _ = semaphore.wait(wallTimeout: .distantFuture)
         return responseArray
+    }
+    
+    class func loginEmployee(loginId : String) -> Employee? {
+        
+        var employee : Employee?
+        let myUrl = URL(string: "http://142.55.32.86:50131/cheriebistro/api/loginUser.php")!
+        let request = NSMutableURLRequest(url: myUrl)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+
+        let postString = "employeeID=\(loginId)"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+        data, response, error in
+            if error != nil
+            {
+                print("error")
+                semaphore.signal()
+                return
+            }
+            do
+            {
+                var LoginJSON : NSDictionary!
+                LoginJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+            
+                if let parseJSON = LoginJSON {
+                    let response:String = parseJSON["status"] as! String;
+                    print("result: \(response)")
+
+                    if(response == "Success")
+                    {
+                        
+                        let employeeId : Int = Int(LoginJSON["employeeID"] as! String)!
+                        let employeeName : String = LoginJSON["employeeName"] as! String
+                        
+                        employee = Employee(id: employeeId, name: employeeName)
+                    }
+                    else{
+                    }
+                }
+            }
+            catch
+            {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return employee
     }
 }

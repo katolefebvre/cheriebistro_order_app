@@ -10,18 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let mainDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    @IBOutlet var employeeNameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if mainDelegate.loggedEmployee != nil {
+            employeeNameLabel.isHidden = false
+            employeeNameLabel.text = "Logged In As: \(mainDelegate.loggedEmployee!.name)"
+        }
+        else {
+            employeeNameLabel.isHidden = true
+        }
     }
-    override func viewDidAppear(_ animated: Bool) {
-         
-         let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn");
-         
-         if !isUserLoggedIn
-         {
-             self.performSegue(withIdentifier: "loginView", sender: self)
-         }
-     }
  
 }
 

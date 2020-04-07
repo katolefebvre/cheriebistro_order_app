@@ -8,86 +8,64 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet var tfID: UITextField!
+    let mainDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    @IBOutlet var idTextField: UITextField!
+    @IBOutlet var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        loginButton.isEnabled = false
+        mainDelegate.loggedEmployee = nil
+    }
+    
+    @IBAction func onIdTextFieldChange(_ sender: Any) {
+        let checkString : String = (idTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines))!
+        if checkString.isEmpty {
+            loginButton.isEnabled = false
+        }
+        else {
+            loginButton.isEnabled = true
+        }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 10
     }
     
     @IBAction func loginButtonTapped(_ sender: AnyObject) {
         
         //Textfields
-        let employeeID = tfID.text;
+        let employeeID = idTextField.text;
         
         if employeeID!.isEmpty
         {
             return
         }
         
-        let myUrl = URL(string: "http://142.55.32.86:50131/cheriebistro/api/loginUser.php")!
-        let request = NSMutableURLRequest(url: myUrl)
-        request.httpMethod = "POST"
-        let semaphore = DispatchSemaphore(value: 0)
-
-        let postString = "employeeID=\(employeeID!)"
-        request.httpBody = postString.data(using: String.Encoding.utf8)
-
-        let task = URLSession.shared.dataTask(with: request as URLRequest)
-        {
-        data, response, error in
-            if error != nil
-            {
-                print("error")
+        if let foundEmployee = DatabaseAccess.loginEmployee(loginId: employeeID!) {
             
-                return
+            mainDelegate.loggedEmployee = foundEmployee
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "loginView", sender: nil)
             }
-            do
-            {
-                var LoginJSON : NSDictionary!
-                LoginJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-            
-                if let parseJSON = LoginJSON {
-                    let response:String = parseJSON["status"] as! String;
-                    print("result: \(response)")
-
-                    if(response == "Success")
-                    {
-                         DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "loginView", sender: nil)
-                        }
-                    }
-                    else{
-                        DispatchQueue.main.async {
-                               let alertController = UIAlertController(title: "Error", message: "Wrong Employee ID", preferredStyle: .alert)
-                               let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                                    alertController.addAction(cancelAction)
-                               self.present(alertController, animated: true)
-                    }
-                }
-                }
-            }
-            catch
-            {
-                print(error)
-            }
-            semaphore.signal()
         }
-        task.resume()
-        _ = semaphore.wait(wallTimeout: .distantFuture)
-        return
-    }
-    }
-    /*
-    // MARK: - Navigation
+            else {
+            let alertController = UIAlertController(title: "Error", message: "Invalid Employee ID", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                 alertController.addAction(cancelAction)
+            self.present(alertController, animated: true)
+        }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-    */
+}
 
 
