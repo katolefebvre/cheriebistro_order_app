@@ -191,6 +191,50 @@ class DatabaseAccess {
         return responseArray
     }
     
+    
+    /// Sends a request to add a category to the database
+    /// - Parameter name: name of the category
+    class func addCategory(name: String)-> [String : String]{
+        
+        var responseArray : [String : String] = [:]
+        
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/api/addCategory.php")!
+        let url = NSMutableURLRequest(url: address)
+        url.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let dataString = "name=\(name)"
+        
+        let dataD = dataString.data(using: .utf8)
+        
+        do {
+            let uploadJob = URLSession.shared.uploadTask(with: url as URLRequest, from: dataD) {
+                data, response, error in
+                if error != nil {
+                    print(error!)
+                    return
+                } else {
+                    //print(data ?? "No Data")
+                    if let unwrappedData = data {
+                        let jsonResponse = try! JSONSerialization.jsonObject(with: unwrappedData, options: [])
+                        guard let jsonArray = jsonResponse as? [String: String] else {
+                            return
+                        }
+                        if jsonArray["error"] == "false" {
+                            responseArray = jsonArray
+                        } else {
+                            responseArray["error"] = "Category failed to upload."
+                        }
+                    }
+                }
+                semaphore.signal()
+            }
+            uploadJob.resume()
+        }
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return responseArray
+    }
+    
     class func loginEmployee(loginId : String) -> Employee? {
         
         var employee : Employee?

@@ -34,11 +34,31 @@ class AddFoodCategoryViewController: UIViewController {
         let addAlert = UIAlertController(title: "Add Category", message: "Do you want to add the food category " + categoryTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines) + "?", preferredStyle: UIAlertController.Style.alert)
 
         addAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (action: UIAlertAction!) in
-              print("Handle Ok logic here")
+            let response : [String : String] = DatabaseAccess.addCategory(name: self.categoryTextField.text!)
+            if response["error"] == "false" {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Upload Successful", message: "Category added successfully.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    self.categoryTextField.text=""
+                }
+            } else {
+                self.showError(message: "Menu item failed to upload.")
+            }
         }))
 
         addAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
         present(addAlert, animated: true, completion: nil)
+    }
+    
+    /// Show an error as an UI Alert message.
+    /// - Parameter message: The content of the UI Alert message.
+    func showError(message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Failure Occurred", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
