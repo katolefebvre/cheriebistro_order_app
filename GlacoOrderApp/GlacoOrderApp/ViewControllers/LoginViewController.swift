@@ -2,7 +2,7 @@
 //  LoginViewController.swift
 //  GlacoOrderApp
 //
-//  Created by Xcode User on 2020-04-03.
+//  Created by Shah Amirshah on 2020-04-03.
 //  Copyright © 2020 GLAC Co. All rights reserved.
 //
 
@@ -18,6 +18,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loginButton.isEnabled = false
+        mainDelegate.loggedEmployee = nil
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         mainDelegate.loggedEmployee = nil
     }
     
@@ -63,6 +67,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                  alertController.addAction(cancelAction)
             self.present(alertController, animated: true)
         }
+        
+        idTextField.text = ""
+        loginButton.isEnabled = false
 
     }
 }
