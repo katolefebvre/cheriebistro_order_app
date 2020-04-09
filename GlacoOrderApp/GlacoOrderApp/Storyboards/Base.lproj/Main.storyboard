@@ -44,7 +44,7 @@
                                 <rect key="frame" x="483" y="407" width="229" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                 <connections>
                                     <action selector="onIdTextFieldChange:" destination="eNq-kd-Tr0" eventType="editingChanged" id="QBg-pm-cgb"/>
                                     <outlet property="delegate" destination="eNq-kd-Tr0" id="ifO-z4-MTg"/>

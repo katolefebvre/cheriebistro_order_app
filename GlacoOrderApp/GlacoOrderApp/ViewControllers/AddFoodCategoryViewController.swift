@@ -43,7 +43,7 @@ class AddFoodCategoryViewController: UIViewController {
                     self.categoryTextField.text=""
                 }
             } else {
-                self.showError(message: "Menu item failed to upload.")
+                self.showError(message: response["message"]!)
             }
         }))
 

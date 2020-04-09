@@ -17,7 +17,7 @@ class DatabaseAccess {
     /// Retrieves all of the TimeSlots stored in the database and returns them.
     class func getTimeSlots() -> [TimeSlot] {
         var results : [TimeSlot] = []
-        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/gettimeslots.php")!
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/gettimeslots.php")!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value: 0)
@@ -54,7 +54,7 @@ class DatabaseAccess {
     /// Retrieves all of the Categories stored in the database and returns them.
     class func getCategories() -> [Category] {
         var results : [Category] = []
-        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/getcategories.php")!
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getcategories.php")!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value: 0)
@@ -92,7 +92,7 @@ class DatabaseAccess {
     /// Retrieves all of the MenuItems stored in the database and returns them.
     class func getMenuItems() -> [MenuItem] {
         var results: [MenuItem] = []
-        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/api/getmenuitems.php")!
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getmenuitems.php")!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
         let semaphore = DispatchSemaphore(value: 0)
@@ -146,7 +146,7 @@ class DatabaseAccess {
     class func addMenuItem(name: String, description: String, timeslotID: Int, price: String, categoryIds : [Int]) -> [String : String] {
         var responseArray : [String : String] = [:]
         
-        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/api/addfooditem.php")!
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/addfooditem.php")!
         let url = NSMutableURLRequest(url: address)
         url.httpMethod = "POST"
         let semaphore = DispatchSemaphore(value: 0)
@@ -193,12 +193,12 @@ class DatabaseAccess {
     
     
     /// Sends a request to add a category to the database
-    /// - Parameter name: name of the category
+    /// - Parameter name: Name of the category.
     class func addCategory(name: String)-> [String : String]{
         
         var responseArray : [String : String] = [:]
         
-        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/api/addCategory.php")!
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/addCategory.php")!
         let url = NSMutableURLRequest(url: address)
         url.httpMethod = "POST"
         let semaphore = DispatchSemaphore(value: 0)
@@ -212,18 +212,19 @@ class DatabaseAccess {
                 data, response, error in
                 if error != nil {
                     print(error!)
+                    semaphore.signal()
                     return
                 } else {
-                    //print(data ?? "No Data")
                     if let unwrappedData = data {
                         let jsonResponse = try! JSONSerialization.jsonObject(with: unwrappedData, options: [])
                         guard let jsonArray = jsonResponse as? [String: String] else {
+                            semaphore.signal()
                             return
                         }
                         if jsonArray["error"] == "false" {
                             responseArray = jsonArray
                         } else {
-                            responseArray["error"] = "Category failed to upload."
+                            responseArray["message"] = "Category failed to upload. \n \(jsonArray["message"]!)"
                         }
                     }
                 }
@@ -235,10 +236,13 @@ class DatabaseAccess {
         return responseArray
     }
     
+    
+    /// Sends a request to login as an employee with the provided ID
+    /// - Parameter loginId: Employee ID.
     class func loginEmployee(loginId : String) -> Employee? {
         
         var employee : Employee?
-        let myUrl = URL(string: "http://142.55.32.86:50131/cheriebistro/api/loginUser.php")!
+        let myUrl = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/loginUser.php")!
         let request = NSMutableURLRequest(url: myUrl)
         request.httpMethod = "POST"
         let semaphore = DispatchSemaphore(value: 0)
