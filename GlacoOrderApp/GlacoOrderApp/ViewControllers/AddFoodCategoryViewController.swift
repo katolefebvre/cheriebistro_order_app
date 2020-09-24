@@ -43,7 +43,7 @@ class AddFoodCategoryViewController: UIViewController {
                     self.categoryTextField.text=""
                 }
             } else {
-                self.showError(message: response["message"]!)
+                self.showError(message: "Category name already exists")
             }
         }))
 
@@ -56,7 +56,7 @@ class AddFoodCategoryViewController: UIViewController {
     /// - Parameter message: The content of the UI Alert message.
     func showError(message: String) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Failure Occurred", message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: "Failed", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

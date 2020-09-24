@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7DF49536242BDE8F00AF3B64 /* DatabaseAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF49535242BDE8F00AF3B64 /* DatabaseAccess.swift */; };
 		AE30182F24378DC500037289 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE30182E24378DC500037289 /* LoginViewController.swift */; };
+		CD146167251B9589000CC32B /* EmployeePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD146166251B9589000CC32B /* EmployeePopoverViewController.swift */; };
+		CD14616A251B9EB1000CC32B /* ModifyEmployeeRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD146169251B9EB1000CC32B /* ModifyEmployeeRoleViewController.swift */; };
+		CD14616D251B9F9C000CC32B /* EmployeePopoverControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD14616C251B9F9C000CC32B /* EmployeePopoverControlDelegate.swift */; };
 		CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */; };
 		CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */; };
 		CD47FAFA243CDDD30004ED31 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD47FAF9243CDDD30004ED31 /* Employee.swift */; };
@@ -33,6 +36,9 @@
 /* Begin PBXFileReference section */
 		7DF49535242BDE8F00AF3B64 /* DatabaseAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseAccess.swift; sourceTree = "<group>"; };
 		AE30182E24378DC500037289 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CD146166251B9589000CC32B /* EmployeePopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePopoverViewController.swift; sourceTree = "<group>"; };
+		CD146169251B9EB1000CC32B /* ModifyEmployeeRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyEmployeeRoleViewController.swift; sourceTree = "<group>"; };
+		CD14616C251B9F9C000CC32B /* EmployeePopoverControlDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeePopoverControlDelegate.swift; sourceTree = "<group>"; };
 		CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPopoverControllerDelegate.swift; sourceTree = "<group>"; };
 		CD45489F241887D800A91FA4 /* AddFoodCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoodCategoryViewController.swift; sourceTree = "<group>"; };
 		CD47FAF9243CDDD30004ED31 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
@@ -75,6 +81,7 @@
 				CD92832024180F54009830A9 /* SceneDelegate.swift */,
 				CD2FB7E62419A799005F134D /* CategoryPopoverControllerDelegate.swift */,
 				CD815988242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift */,
+				CD14616C251B9F9C000CC32B /* EmployeePopoverControlDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -149,6 +156,8 @@
 				CDAD18B22419535700718E2F /* CategoryPopoverViewController.swift */,
 				CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */,
 				AE30182E24378DC500037289 /* LoginViewController.swift */,
+				CD146166251B9589000CC32B /* EmployeePopoverViewController.swift */,
+				CD146169251B9EB1000CC32B /* ModifyEmployeeRoleViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -247,8 +256,11 @@
 				CD92833924181415009830A9 /* AddFoodItemViewController.swift in Sources */,
 				7DF49536242BDE8F00AF3B64 /* DatabaseAccess.swift in Sources */,
 				CDBA97E9242AE3350050F272 /* DatabaseIdTableViewCell.swift in Sources */,
+				CD14616A251B9EB1000CC32B /* ModifyEmployeeRoleViewController.swift in Sources */,
 				CDAD18B32419535700718E2F /* CategoryPopoverViewController.swift in Sources */,
+				CD146167251B9589000CC32B /* EmployeePopoverViewController.swift in Sources */,
 				CD4548A0241887D800A91FA4 /* AddFoodCategoryViewController.swift in Sources */,
+				CD14616D251B9F9C000CC32B /* EmployeePopoverControlDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

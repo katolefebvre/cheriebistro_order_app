@@ -135,6 +135,43 @@ class DatabaseAccess {
         return results
     }
     
+    /// Retrieves all of the Employees stored in the database and returns them.
+    class func getEmployees() -> [Employee] {
+        var results : [Employee] = []
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getemployees.php")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error")
+                return
+            }
+            
+            do {
+                var employeeJSON : NSDictionary!
+                employeeJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                let employeeArray : NSArray = employeeJSON["employees"] as! NSArray
+                
+                for employee in employeeArray {
+                    if let e = employee as? [String : Any] {
+                        results.append(Employee(id: e["employeeID"]! as! String, name: e["employeeName"]! as! String, roleID: e["roleID"]! as! String))
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return results
+    }
+    
     
     /// Sends a request to add a MenuItem to the database
     /// - Parameters:
@@ -272,8 +309,9 @@ class DatabaseAccess {
                         
                         let employeeId : String = LoginJSON["employeeID"] as! String
                         let employeeName : String = LoginJSON["employeeName"] as! String
+                        let roleID : String = LoginJSON["roleID"] as! String
                         
-                        employee = Employee(id: employeeId, name: employeeName)
+                        employee = Employee(id: employeeId, name: employeeName, roleID: roleID)
                     }
                     else{
                     }
