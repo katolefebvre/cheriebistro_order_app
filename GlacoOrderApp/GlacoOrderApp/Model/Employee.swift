@@ -12,12 +12,18 @@ public class Employee {
     
     var id : String
     var name : String
-    var roleID : String
+    var role : Role
     
-    init(id : String, name : String, roleID : String) {
+    init(id : String, name : String, role : Role) {
         self.id = id
         self.name = name
-        self.roleID = roleID
+        self.role = role
+    }
+    
+    init(id : String, name : String, roleID : String, roleName : String) {
+        self.id = id
+        self.name = name
+        self.role = Role(id: roleID, name: roleName)
     }
     
 }

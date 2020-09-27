@@ -158,7 +158,43 @@ class DatabaseAccess {
                 
                 for employee in employeeArray {
                     if let e = employee as? [String : Any] {
-                        results.append(Employee(id: e["employeeID"]! as! String, name: e["employeeName"]! as! String, roleID: e["roleID"]! as! String))
+                        results.append(Employee(id: e["employeeID"]! as! String, name: e["employeeName"]! as! String, roleID: e["roleID"]! as! String, roleName: e["roleName"]! as! String))
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return results
+    }
+    
+    class func getRoles() -> [Role] {
+        var results : [Role] = []
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getroles.php")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error")
+                return
+            }
+            
+            do {
+                var employeeJSON : NSDictionary!
+                employeeJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                let roleArray : NSArray = employeeJSON["roles"] as! NSArray
+                
+                for role in roleArray {
+                    if let r = role as? [String : Any] {
+                        results.append(Role(id : r["roleID"]! as! String, name: r["roleName"]! as! String))
                     }
                 }
             } catch {
@@ -310,8 +346,9 @@ class DatabaseAccess {
                         let employeeId : String = LoginJSON["employeeID"] as! String
                         let employeeName : String = LoginJSON["employeeName"] as! String
                         let roleID : String = LoginJSON["roleID"] as! String
+                        let roleName : String = LoginJSON["roleName"] as! String
                         
-                        employee = Employee(id: employeeId, name: employeeName, roleID: roleID)
+                        employee = Employee(id: employeeId, name: employeeName, roleID: roleID, roleName: roleName)
                     }
                     else{
                     }
@@ -326,5 +363,47 @@ class DatabaseAccess {
         task.resume()
         _ = semaphore.wait(wallTimeout: .distantFuture)
         return employee
+    }
+    
+    class func changeRole(employeeID : String, roleID : String) -> [String : String] {
+        var responseArray : [String : String] = [:]
+        
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/changeRole.php")!
+        let url = NSMutableURLRequest(url: address)
+        url.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        var dataString = "employeeID=\(employeeID)"
+        dataString += "&roleID=\(roleID)"
+        
+        let dataD = dataString.data(using: .utf8)
+        
+        do {
+            let uploadJob = URLSession.shared.uploadTask(with: url as URLRequest, from: dataD) {
+                data, response, error in
+                if error != nil {
+                    print(error!)
+                    semaphore.signal()
+                    return
+                } else {
+                    if let unwrappedData = data {
+                        let jsonResponse = try! JSONSerialization.jsonObject(with: unwrappedData, options: [])
+                        guard let jsonArray = jsonResponse as? [String: String] else {
+                            semaphore.signal()
+                            return
+                        }
+                        if jsonArray["error"] == "false" {
+                            responseArray = jsonArray
+                        } else {
+                            responseArray["message"] = "Role failed to change. \n \(jsonArray["message"]!)"
+                        }
+                    }
+                }
+                semaphore.signal()
+            }
+            uploadJob.resume()
+        }
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return responseArray
     }
 }

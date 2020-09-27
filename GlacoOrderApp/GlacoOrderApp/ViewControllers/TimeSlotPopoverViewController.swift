@@ -49,8 +49,8 @@ class TimeSlotPopoverViewController: UIViewController, UITableViewDataSource, UI
         let displayCell = cell as! DatabaseIdTableViewCell
         if (controllerDelegate?.getTimeSlot() != nil) {
             if (displayCell.databaseId == (controllerDelegate!.getTimeSlot()?.id)!) {
-                           tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-                   }
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
         }
     }
 

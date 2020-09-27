@@ -10,8 +10,7 @@ import Foundation
 
 protocol EmployeePopoverControllerDelegate {
     
-    func getEmployees() -> [Employee]
+    func getEmployee() -> Employee?
     func setEditEmployee(employee : Employee)
-    func setEmployeeRole(employee : Employee, roleID : String)
     
 }
