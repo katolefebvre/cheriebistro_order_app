@@ -172,6 +172,9 @@ class DatabaseAccess {
         return results
     }
     
+    
+    /// Obtains all of the roles stored in the database along with associated IDs.
+    /// - Returns: An array of stored roles.
     class func getRoles() -> [Role] {
         var results : [Role] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getroles.php")!
@@ -365,6 +368,10 @@ class DatabaseAccess {
         return employee
     }
     
+    /// Sends a request to change an employee's role to the given role.
+    /// - Parameters:
+    ///   - employeeID: The ID of the employee to have their role changed.
+    ///   - roleID: The ID of the chosen role for the employee.
     class func changeRole(employeeID : String, roleID : String) -> [String : String] {
         var responseArray : [String : String] = [:]
         

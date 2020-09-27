@@ -79,7 +79,7 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
         let changeRoleAlert = UIAlertController(title: "Change Roles", message: "Do you want to assign the role of " + getRole()!.name + " to " + getEmployee()!.name + "?", preferredStyle: UIAlertController.Style.alert)
         
         changeRoleAlert.addAction(UIAlertAction(title: "Change", style : .default, handler : { [self] (action : UIAlertAction!) in
-            let response : [String : String] = DatabaseAccess.changeRole(employeeID: getEmployee()!.id, roleID: self.getRole()!.id)
+            let response : [String : String] = DatabaseAccess.changeRole(employeeID: self.getEmployee()!.id, roleID: self.getRole()!.id)
             if response["error"] == "false" {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Update Successful", message: "Role changed successfully.", preferredStyle: .alert)
