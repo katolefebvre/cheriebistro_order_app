@@ -13,8 +13,8 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
     @IBOutlet var selectedEmployeeLabel: UILabel!
     @IBOutlet var currentRoleLabel: UILabel!
     @IBOutlet var selectedRoleLabel: UILabel!
-    var editEmployee : Employee?
-    var editRole : Role?
+    private var editEmployee : Employee?
+    private var editRole : Role?
     
     func getEmployee() -> Employee? {
         if let employee = editEmployee {
@@ -82,32 +82,35 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
     }
     
     @IBAction func submitRoleChange(_ sender: UIButton) {
-        
-        let changeRoleAlert = UIAlertController(title: "Change Roles", message: "Do you want to assign the role of " + getRole()!.name + " to " + getEmployee()!.name + "?", preferredStyle: UIAlertController.Style.alert)
-        
-        changeRoleAlert.addAction(UIAlertAction(title: "Change", style : .default, handler : { [self] (action : UIAlertAction!) in
-            if getEmployee()!.role.id == getRole()!.id {
-                self.showError(message: "Employee is already this role, please try again.")
-            }
-            else {
-                let response : [String : String] = DatabaseAccess.changeRole(employeeID: self.getEmployee()!.id, roleID: self.getRole()!.id)
-                if response["error"] == "false" {
-                    DispatchQueue.main.async {
-                        setCurrentRoleLabel(currentRole: self.getRole()!)
-                        self.editEmployee!.role = self.getRole()!
-                        let alert = UIAlertController(title: "Update Successful", message: "Role changed successfully.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                } else {
-                    self.showError(message: "Role change failed.")
+        if getRole() != nil && getEmployee() != nil {
+            let changeRoleAlert = UIAlertController(title: "Change Roles", message: "Do you want to assign the role of " + getRole()!.name + " to " + getEmployee()!.name + "?", preferredStyle: UIAlertController.Style.alert)
+            
+            changeRoleAlert.addAction(UIAlertAction(title: "Change", style : .default, handler : { [self] (action : UIAlertAction!) in
+                if getEmployee()!.role.id == getRole()!.id {
+                    self.showError(message: "Employee is already this role, please try again.")
                 }
-            }
-        }))
-        
-        changeRoleAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        present(changeRoleAlert, animated : true, completion : nil)
+                else {
+                    let response : [String : String] = DatabaseAccess.changeRole(employeeID: self.getEmployee()!.id, roleID: self.getRole()!.id)
+                    if response["error"] == "false" {
+                        DispatchQueue.main.async {
+                            setCurrentRoleLabel(currentRole: self.getRole()!)
+                            self.editEmployee!.role = self.getRole()!
+                            let alert = UIAlertController(title: "Update Successful", message: "Role changed successfully.", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    } else {
+                        self.showError(message: "Role change failed.")
+                    }
+                }
+            }))
+            changeRoleAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            
+            present(changeRoleAlert, animated : true, completion : nil)
+        }
+        else {
+            showError(message: "An employee and role are required in order to complete this operation.")
+        }
     }
     
     /// Show an error as an UI Alert message.
