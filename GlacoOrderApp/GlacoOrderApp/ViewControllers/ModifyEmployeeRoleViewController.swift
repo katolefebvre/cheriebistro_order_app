@@ -11,6 +11,7 @@ import UIKit
 class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, EmployeePopoverControllerDelegate, RolePopoverControllerDelegate {
     
     @IBOutlet var selectedEmployeeLabel: UILabel!
+    @IBOutlet var currentRoleLabel: UILabel!
     @IBOutlet var selectedRoleLabel: UILabel!
     var editEmployee : Employee?
     var editRole : Role?
@@ -28,9 +29,11 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
         editEmployee = employee
         if let validEmployee = editEmployee {
             selectedEmployeeLabel.text = validEmployee.name
+            currentRoleLabel.text = validEmployee.role.name
         }
         else {
             selectedEmployeeLabel.text = ""
+            currentRoleLabel.text = ""
         }
     }
     
@@ -51,6 +54,10 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
         else {
             selectedRoleLabel.text = ""
         }
+    }
+    
+    func setCurrentRoleLabel(currentRole : Role) {
+        currentRoleLabel.text = currentRole.name
     }
     
     
@@ -79,15 +86,22 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
         let changeRoleAlert = UIAlertController(title: "Change Roles", message: "Do you want to assign the role of " + getRole()!.name + " to " + getEmployee()!.name + "?", preferredStyle: UIAlertController.Style.alert)
         
         changeRoleAlert.addAction(UIAlertAction(title: "Change", style : .default, handler : { [self] (action : UIAlertAction!) in
-            let response : [String : String] = DatabaseAccess.changeRole(employeeID: self.getEmployee()!.id, roleID: self.getRole()!.id)
-            if response["error"] == "false" {
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Update Successful", message: "Role changed successfully.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+            if getEmployee()!.role.id == getRole()!.id {
+                self.showError(message: "Employee is already this role, please try again.")
+            }
+            else {
+                let response : [String : String] = DatabaseAccess.changeRole(employeeID: self.getEmployee()!.id, roleID: self.getRole()!.id)
+                if response["error"] == "false" {
+                    DispatchQueue.main.async {
+                        setCurrentRoleLabel(currentRole: self.getRole()!)
+                        self.editEmployee!.role = self.getRole()!
+                        let alert = UIAlertController(title: "Update Successful", message: "Role changed successfully.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    self.showError(message: "Role change failed.")
                 }
-            } else {
-                self.showError(message: "Role change failed.")
             }
         }))
         
