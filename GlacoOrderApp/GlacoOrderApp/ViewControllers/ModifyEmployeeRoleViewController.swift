@@ -100,7 +100,7 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
                             self.present(alert, animated: true, completion: nil)
                         }
                     } else {
-                        self.showError(message: "Role change failed.")
+                        self.showError(message: "Role change failed, please try again.")
                     }
                 }
             }))
