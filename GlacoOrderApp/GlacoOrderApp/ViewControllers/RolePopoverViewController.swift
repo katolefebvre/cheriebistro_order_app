@@ -70,6 +70,6 @@ class RolePopoverViewController: UIViewController, UITableViewDataSource, UITabl
         let selectedCell = tableView.cellForRow(at: indexPath) as! DatabaseIdTableViewCell
         let selectedCellContent = selectedCell.databaseId!
         
-        controllerDelegate?.setEditRole(role: validRolesToSelect.first(where: {$0.id == String(selectedCellContent)})!)
+        controllerDelegate?.setRole(role: validRolesToSelect.first(where: {$0.id == String(selectedCellContent)})!)
     }
 }

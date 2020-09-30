@@ -11,6 +11,6 @@ import Foundation
 protocol EmployeePopoverControllerDelegate {
     
     func getEmployee() -> Employee?
-    func setEditEmployee(employee : Employee)
+    func setEmployee(employee : Employee)
     
 }

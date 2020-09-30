@@ -25,7 +25,7 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
         }
     }
     
-    func setEditEmployee(employee: Employee) {
+    func setEmployee(employee: Employee) {
         editEmployee = employee
         if let validEmployee = editEmployee {
             selectedEmployeeLabel.text = validEmployee.name
@@ -46,7 +46,7 @@ class ModifyEmployeeRoleViewController : UIViewController, UITextFieldDelegate, 
         }
     }
     
-    func setEditRole(role : Role) {
+    func setRole(role : Role) {
         editRole = role
         if let validRole = editRole {
             selectedRoleLabel.text = validRole.name

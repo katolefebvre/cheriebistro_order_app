@@ -391,7 +391,7 @@
             </objects>
             <point key="canvasLocation" x="1531" y="1140"/>
         </scene>
-        <!--Modify Employee Role View Controller-->
+        <!--Modify Role-->
         <scene sceneID="hWR-qB-Qtr">
             <objects>
                 <viewController id="qwR-Sy-0e5" customClass="ModifyEmployeeRoleViewController" customModule="GlacoOrderApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -469,7 +469,7 @@
                         <viewLayoutGuide key="safeArea" id="Dev-Cl-CBL"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" id="OZq-K7-t8C"/>
+                    <navigationItem key="navigationItem" title="Modify Role" id="OZq-K7-t8C"/>
                     <connections>
                         <outlet property="currentRoleLabel" destination="nlA-np-cAo" id="E5j-Tr-6DA"/>
                         <outlet property="selectedEmployeeLabel" destination="rK8-jL-WaZ" id="wgP-1C-87o"/>

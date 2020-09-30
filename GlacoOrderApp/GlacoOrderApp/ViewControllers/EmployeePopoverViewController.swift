@@ -70,6 +70,6 @@ class EmployeePopoverViewController: UIViewController, UITableViewDataSource, UI
         let selectedCell = tableView.cellForRow(at: indexPath) as! DatabaseIdTableViewCell
         let selectedCellContent = selectedCell.databaseId!
         
-        controllerDelegate?.setEditEmployee(employee: validToModifyEmployees.first(where: {$0.id == String(selectedCellContent)})!)
+        controllerDelegate?.setEmployee(employee: validToModifyEmployees.first(where: {$0.id == String(selectedCellContent)})!)
     }
 }

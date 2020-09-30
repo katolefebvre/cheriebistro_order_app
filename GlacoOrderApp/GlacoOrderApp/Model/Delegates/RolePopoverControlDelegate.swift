@@ -11,6 +11,6 @@ import Foundation
 protocol RolePopoverControllerDelegate {
     
     func getRole() -> Role?
-    func setEditRole(role : Role)
+    func setRole(role : Role)
     
 }
