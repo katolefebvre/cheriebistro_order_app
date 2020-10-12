@@ -269,7 +269,7 @@ class DatabaseAccess {
             do {
                 var employeeJSON : NSDictionary!
                 employeeJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                let orderDetailsArray : NSArray = employeeJSON["orders"] as! NSArray
+                let orderDetailsArray : NSArray = employeeJSON["orderDetails"] as! NSArray
                 
                 for order in orderDetailsArray {
                     if let o = order as? [String : Any] {
