@@ -211,6 +211,81 @@ class DatabaseAccess {
         return results
     }
     
+    class func getOrders() -> [Any] {
+        var results : [Any] = []
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getOrders.php")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error")
+                return
+            }
+            
+            do {
+                var employeeJSON : NSDictionary!
+                employeeJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                let orderArray : NSArray = employeeJSON["orders"] as! NSArray
+                
+                for order in orderArray {
+                    if let o = order as? [String : Any] {
+                        results.append(/* PUT OBJECT INIT HERE */(orderID : o["order_id"]! as! String, price: o["price_total"]! as! String, status: o["status"]! as! String, tableID: o["table_id"]! as! String))
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return results
+    }
+    
+    class func getOrderDetails(orderID : Int) -> [Any] {
+        var results : [Any] = []
+        
+        let myUrl = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getOrderDetails.php")!
+        let request = NSMutableURLRequest(url: myUrl)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+
+        let postString = "order_id=\(orderID)"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error")
+                return
+            }
+            
+            do {
+                var employeeJSON : NSDictionary!
+                employeeJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                let orderDetailsArray : NSArray = employeeJSON["orders"] as! NSArray
+                
+                for order in orderDetailsArray {
+                    if let o = order as? [String : Any] {
+                        results.append(/*PUT OBJECT INIT HERE!!*/(orderID : o["order_id"]! as! String, itemID: o["menu_item_id"]! as! String, quantity: o["quantity"]! as! String, itemModification: o["item_modification"]! as! String, name: o["name"]! as! String))
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return results
+    }
     
     /// Sends a request to add a MenuItem to the database
     /// - Parameters:
