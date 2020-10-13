@@ -211,8 +211,8 @@ class DatabaseAccess {
         return results
     }
     
-    class func getOrders() -> [Any] {
-        var results : [Any] = []
+    class func getOrders() -> [Order] {
+        var results : [Order] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getOrders.php")!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "GET"
@@ -227,13 +227,13 @@ class DatabaseAccess {
             }
             
             do {
-                var employeeJSON : NSDictionary!
-                employeeJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                let orderArray : NSArray = employeeJSON["orders"] as! NSArray
-                
+                var ordersJSON : NSDictionary!
+                ordersJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                let orderArray : NSArray = ordersJSON["orders"] as! NSArray
+        
                 for order in orderArray {
                     if let o = order as? [String : Any] {
-                        results.append(/* PUT OBJECT INIT HERE */(orderID : o["order_id"]! as! String, price: o["price_total"]! as! String, status: o["status"]! as! String, tableID: o["table_id"]! as! String))
+                        results.append(Order(id : Int(o["order_id"]! as! String)!, tableId: Int(o["table_id"]! as! String)!, totalPrice: Float(o["price_total"]! as! String)!, status: o["status"]! as! String))
                     }
                 }
             } catch {
@@ -247,8 +247,8 @@ class DatabaseAccess {
         return results
     }
     
-    class func getOrderDetails(orderID : Int) -> [Any] {
-        var results : [Any] = []
+    class func getOrderDetails(orderID : Int) -> [OrderItem] {
+        var results : [OrderItem] = []
         
         let myUrl = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getOrderDetails.php")!
         let request = NSMutableURLRequest(url: myUrl)
@@ -267,13 +267,31 @@ class DatabaseAccess {
             }
             
             do {
-                var employeeJSON : NSDictionary!
-                employeeJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
-                let orderDetailsArray : NSArray = employeeJSON["orderDetails"] as! NSArray
+                var orderDetailsJSON : NSDictionary!
+                orderDetailsJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                let orderDetailsArray : NSArray = orderDetailsJSON["orderDetails"] as! NSArray
                 
                 for order in orderDetailsArray {
                     if let o = order as? [String : Any] {
-                        results.append(/*PUT OBJECT INIT HERE!!*/(orderID : o["order_id"]! as! String, itemID: o["menu_item_id"]! as! String, quantity: o["quantity"]! as! String, itemModification: o["item_modification"]! as! String, name: o["name"]! as! String))
+                        let menuItemArray: NSArray = o["menu_item"] as! NSArray
+                        for item in menuItemArray {
+                            if let m = item as? [String : Any] {
+                                results.append(
+                                    OrderItem(
+                                        orderId : Int(o["order_id"]! as! String)!,
+                                        quantity: Int(o["quantity"]! as! String)!,
+                                        itemModification: o["item_modification"]! as! String,
+                                        menuItem: MenuItem(
+                                            id: Int(m["id"]! as! String)!,
+                                            name: m["name"]! as! String,
+                                            description: m["description"]! as! String,
+                                            price: Float(m["price"]! as! String)!,
+                                            timeslot: TimeSlot(id: Int(m["time_slot_id"]! as! String)!, name: "Test")
+                                        )
+                                    )
+                                )
+                            }
+                        }
                     }
                 }
             } catch {
@@ -403,14 +421,13 @@ class DatabaseAccess {
 
         let task = URLSession.shared.dataTask(with: request as URLRequest) {
         data, response, error in
-            if error != nil
-            {
+            if error != nil {
                 print("error")
                 semaphore.signal()
                 return
             }
-            do
-            {
+            
+            do {
                 var LoginJSON : NSDictionary!
                 LoginJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
             
@@ -418,22 +435,18 @@ class DatabaseAccess {
                     let response:String = parseJSON["status"] as! String;
                     print("result: \(response)")
 
-                    if(response == "Success")
-                    {
-                        
+                    if response == "Success" {
                         let employeeId : String = LoginJSON["employeeID"] as! String
                         let employeeName : String = LoginJSON["employeeName"] as! String
                         let roleID : String = LoginJSON["roleID"] as! String
                         let roleName : String = LoginJSON["roleName"] as! String
                         
                         employee = Employee(id: employeeId, name: employeeName, roleID: roleID, roleName: roleName)
-                    }
-                    else{
+                    } else {
+                        print("error")
                     }
                 }
-            }
-            catch
-            {
+            } catch {
                 print(error)
             }
             semaphore.signal()
@@ -478,6 +491,48 @@ class DatabaseAccess {
                             responseArray = jsonArray
                         } else {
                             responseArray["message"] = "Role failed to change. \n \(jsonArray["message"]!)"
+                        }
+                    }
+                }
+                semaphore.signal()
+            }
+            uploadJob.resume()
+        }
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return responseArray
+    }
+    
+    class func changeOrderStatus(orderID : Int, status: String) -> [String : String] {
+        var responseArray : [String : String] = [:]
+        
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/changeOrderStatus.php")!
+        let url = NSMutableURLRequest(url: address)
+        url.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        var dataString = "orderID=\(orderID)"
+        dataString += "&status=\(status)"
+        
+        let dataD = dataString.data(using: .utf8)
+        
+        do {
+            let uploadJob = URLSession.shared.uploadTask(with: url as URLRequest, from: dataD) {
+                data, response, error in
+                if error != nil {
+                    print(error!)
+                    semaphore.signal()
+                    return
+                } else {
+                    if let unwrappedData = data {
+                        let jsonResponse = try! JSONSerialization.jsonObject(with: unwrappedData, options: [])
+                        guard let jsonArray = jsonResponse as? [String: String] else {
+                            semaphore.signal()
+                            return
+                        }
+                        if jsonArray["error"] == "false" {
+                            responseArray = jsonArray
+                        } else {
+                            responseArray["message"] = "Order status change failed. \n \(jsonArray["message"]!)"
                         }
                     }
                 }

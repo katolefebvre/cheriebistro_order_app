@@ -8,13 +8,17 @@
 
 import Foundation
 
-class TableOrder {
+class Order {
     
     var id: Int
     var tableId: Int
+    var totalPrice: Float
+    var status: String
     
-    init(id: Int, tableId: Int) {
+    init(id: Int, tableId: Int, totalPrice: Float, status: String) {
         self.id = id
         self.tableId = tableId
+        self.totalPrice = totalPrice
+        self.status = status
     }
 }
