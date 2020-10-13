@@ -263,7 +263,7 @@
                     <connections>
                         <outlet property="ordersTable" destination="s7O-Vn-Bcq" id="YIg-yu-hmq"/>
                         <outlet property="viewAllBtn" destination="UA1-3U-Bgo" id="FdV-ad-tcp"/>
-                        <outlet property="viewConfirmedBtn" destination="IV1-5G-X23" id="wmk-6d-OJR"/>
+                        <outlet property="viewConfirmedBtn" destination="IV1-5G-X23" id="dZt-Tg-LXy"/>
                         <outlet property="viewPendingBtn" destination="CgG-KH-oCL" id="Y4Q-cz-jb3"/>
                     </connections>
                 </viewController>
