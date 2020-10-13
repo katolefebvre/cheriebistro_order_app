@@ -48,21 +48,22 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
         return cell!
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, bool)  in
-            self.orderItems.remove(at: indexPath.row)
-            self.orderItemsTable.deleteRows(at: [indexPath], with: .fade)
-        }
-        
-        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, bool) in
-            print("edit")
-        }
-        
-        let swipeActions = UISwipeActionsConfiguration(actions: [delete, edit])
-        return swipeActions
-    }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    // Kato Lefebvre - for future use case
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, bool)  in
+//            self.orderItems.remove(at: indexPath.row)
+//            self.orderItemsTable.deleteRows(at: [indexPath], with: .fade)
+//        }
+//
+//        let edit = UIContextualAction(style: .normal, title: "Edit") { (action, view, bool) in
+//            print("edit")
+//        }
+//
+//        let swipeActions = UISwipeActionsConfiguration(actions: [delete, edit])
+//        return swipeActions
+//    }
+//
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
 }
