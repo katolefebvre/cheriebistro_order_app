@@ -169,7 +169,7 @@
             </objects>
             <point key="canvasLocation" x="138.69346733668343" y="137.41007194244605"/>
         </scene>
-        <!--Table Orders View Controller-->
+        <!--Orders-->
         <scene sceneID="mko-uq-9J8">
             <objects>
                 <viewController id="WOz-aq-Qq2" customClass="TableOrdersViewController" customModule="GlacoOrderApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -259,7 +259,7 @@
                         <viewLayoutGuide key="safeArea" id="JOy-Go-ZYd"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VbU-zW-9dm"/>
+                    <navigationItem key="navigationItem" title="Orders" id="VbU-zW-9dm"/>
                     <connections>
                         <outlet property="ordersTable" destination="s7O-Vn-Bcq" id="YIg-yu-hmq"/>
                         <outlet property="viewAllBtn" destination="UA1-3U-Bgo" id="FdV-ad-tcp"/>
@@ -476,8 +476,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Table #" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvz-6u-FUL">
-                                <rect key="frame" x="95" y="133" width="515" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Cost: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnl-fw-2EQ">
+                                <rect key="frame" x="95" y="140" width="515" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -530,11 +530,19 @@
                                     <outlet property="delegate" destination="dHn-fE-cME" id="gLC-8n-cSb"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Table #" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvz-6u-FUL">
+                                <rect key="frame" x="95" y="111" width="515" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ohn-hZ-cqj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="costNumLbl" destination="tnl-fw-2EQ" id="Dug-bh-MCp"/>
                         <outlet property="orderItemsTable" destination="Yxg-Uw-m7O" id="LcJ-Sf-AX7"/>
                         <outlet property="orderNumLbl" destination="qdG-RA-UBt" id="weL-gL-EMG"/>
                         <outlet property="tableNumLbl" destination="Gvz-6u-FUL" id="tdr-O5-eCn"/>

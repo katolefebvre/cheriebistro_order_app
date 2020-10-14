@@ -27,7 +27,7 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
         if orders.count == 0 {
             let emptyOrdersAlertController = UIAlertController(title: "No Orders Available", message: "No orders are available to manage at this time.", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "OK", style: .cancel) { alertAction in
-                self.performSegue(withIdentifier: "doUnwindToLanding", sender: self)
+                self.navigationController?.popViewController(animated: true)
             }
             emptyOrdersAlertController.addAction(cancelAction)
             self.present(emptyOrdersAlertController, animated: true)
@@ -40,7 +40,7 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
         viewAllBtn.isEnabled = false
     }
     
-    @IBAction func viewAllOrders() {
+    @IBAction private func viewAllOrders() {
         visibleOrders = []
         visibleOrders = orders
         
@@ -53,7 +53,7 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
         viewConfirmedBtn.isEnabled = true
     }
     
-    @IBAction func viewPendingOrders() {
+    @IBAction private func viewPendingOrders() {
         visibleOrders = []
         
         for o in orders {
@@ -71,7 +71,7 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
         viewConfirmedBtn.isEnabled = true
     }
     
-    @IBAction func viewConfirmedOrders() {
+    @IBAction private func viewConfirmedOrders() {
         visibleOrders = []
         
         for o in orders {

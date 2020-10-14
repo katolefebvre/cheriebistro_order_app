@@ -14,6 +14,7 @@ class Order {
     var tableId: Int
     var totalPrice: Float
     var status: String
+    var orderItems : [OrderItem]?
     
     init(id: Int, tableId: Int, totalPrice: Float, status: String) {
         self.id = id

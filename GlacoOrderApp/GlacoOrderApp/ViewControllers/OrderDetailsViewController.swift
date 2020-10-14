@@ -12,16 +12,16 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var orderNumLbl: UILabel!
     @IBOutlet weak var tableNumLbl: UILabel!
+    @IBOutlet weak var costNumLbl: UILabel!
     @IBOutlet weak var orderItemsTable: UITableView!
     @IBOutlet weak var confirmOrderBtn: UIButton!
     
     public var order: Order?
-    public var orderItems: [OrderItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        orderItems = DatabaseAccess.getOrderDetails(orderID: order!.id)
+        order?.orderItems = DatabaseAccess.getOrderDetails(orderID: order!.id)
         
         DispatchQueue.main.async {
             self.orderItemsTable.reloadData()
@@ -29,10 +29,11 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
         
         orderNumLbl.text = "Order # \(order?.id ?? 0)"
         tableNumLbl.text = "Table # \(order?.tableId ?? 0)"
+        costNumLbl.text = "Total Cost: $\(order?.totalPrice ?? 0.00)"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderItems.count
+        return (order?.orderItems!.count)!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -41,9 +42,9 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : OrderItemsTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "orderItem") as? OrderItemsTableViewCell ?? OrderItemsTableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: "orderItem")
-        cell?.itemNameLbl.text = orderItems[indexPath.row].menuItem.name
-        cell?.itemModLbl.text = orderItems[indexPath.row].itemModification
-        cell?.itemQtyLbl.text = String(orderItems[indexPath.row].quantity)
+        cell?.itemNameLbl.text = order!.orderItems![indexPath.row].menuItem.name
+        cell?.itemModLbl.text = order!.orderItems![indexPath.row].itemModification
+        cell?.itemQtyLbl.text = String(order!.orderItems![indexPath.row].quantity)
         
         return cell!
     }
