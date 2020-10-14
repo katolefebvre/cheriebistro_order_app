@@ -211,6 +211,9 @@ class DatabaseAccess {
         return results
     }
     
+    
+    /// Gets all orders from the remote database.
+    /// - Returns: Array of Order objects
     class func getOrders() -> [Order] {
         var results : [Order] = []
         let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getOrders.php")!
@@ -247,6 +250,10 @@ class DatabaseAccess {
         return results
     }
     
+    
+    /// Gets all order items based upon the given order ID
+    /// - Parameter orderID: The order ID to obtain items for
+    /// - Returns: Array of Order Item object
     class func getOrderDetails(orderID : Int) -> [OrderItem] {
         var results : [OrderItem] = []
         
