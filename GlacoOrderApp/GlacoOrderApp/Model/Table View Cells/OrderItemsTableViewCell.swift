@@ -12,8 +12,9 @@ import UIKit
 class OrderItemsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var itemNameLbl: UILabel!
-    @IBOutlet weak var itemModLbl: UILabel!
     @IBOutlet weak var itemQtyLbl: UILabel!
+    @IBOutlet weak var itemModTf: UITextField!
+    @IBOutlet weak var itemQtyStepper: UIStepper!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,5 +22,10 @@ class OrderItemsTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    
+    @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        itemQtyLbl.text = Int(sender.value).description
     }
 }
