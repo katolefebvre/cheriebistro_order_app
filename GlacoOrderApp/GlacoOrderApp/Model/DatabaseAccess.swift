@@ -550,4 +550,107 @@ class DatabaseAccess {
         _ = semaphore.wait(wallTimeout: .distantFuture)
         return responseArray
     }
+    
+    class func editOrder(order: Order) -> Int {
+        var result: Int = 0
+        
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/adminEditOrder.php")!
+        let request = NSMutableURLRequest(url: address)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        var dataString = "order_id=\(order.id)"
+        dataString = dataString + "&table_id=\(order.tableId)"
+        dataString = dataString + "&price_total=\(order.totalPrice)"
+        dataString = dataString + "&status=\(order.status)"
+        
+        request.httpBody = dataString.data(using: .utf8)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("ERROR: " + error!.localizedDescription)
+                semaphore.signal()
+                return
+            }
+            
+            do {
+                var orderJSON: NSDictionary!
+                orderJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                
+                if let parseJSON = orderJSON {
+                    let error: String = parseJSON["error"] as! String
+                    
+                    if error == "false" {
+                        result = Int(parseJSON["updated"] as! String) ?? 0
+                    }
+                } else {
+                    print("ERROR")
+                    return
+                }
+            } catch {
+                print("ERROR: " + error.localizedDescription)
+            }
+            
+            semaphore.signal()
+        }
+        
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        
+        return result
+    }
+    
+    class func editOrderItem(orderItem: OrderItem, delete: Bool) -> Int {
+        var result: Int = 0
+        
+        let address = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/adminEditOrderItem.php")!
+        let request = NSMutableURLRequest(url: address)
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        var dataString = "order_id=\(orderItem.orderId)"
+        dataString = dataString + "&menu_item_id=\(orderItem.menuItem.id)"
+        dataString = dataString + "&item_modification=\(orderItem.itemModification)"
+        dataString = dataString + "&quantity=\(orderItem.quantity)"
+        dataString = dataString + "&delete=\(delete)"
+        
+        request.httpBody = dataString.data(using: .utf8)
+
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+
+            if error != nil {
+                print("ERROR: " + error!.localizedDescription)
+                semaphore.signal()
+                return
+            }
+
+            do {
+                var orderJSON: NSDictionary!
+                orderJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+
+                if let parseJSON = orderJSON {
+                    let error: String = parseJSON["error"] as! String
+
+                    if error == "false" {
+                        result = Int(parseJSON["updated"] as! String) ?? 0
+                    }
+                } else {
+                    print("ERROR")
+                    return
+                }
+            } catch {
+                print("ERROR: " + error.localizedDescription)
+            }
+
+            semaphore.signal()
+        }
+
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        
+        return result
+    }
 }
