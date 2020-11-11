@@ -22,4 +22,11 @@ class Order {
         self.totalPrice = totalPrice
         self.status = status
     }
+    
+    func updateTotalWithTax(){
+        self.totalPrice = 0
+        for item in self.orderItems! {
+            self.totalPrice += item.menuItem.price * 1.13 * Float(item.quantity)
+        }
+    }
 }

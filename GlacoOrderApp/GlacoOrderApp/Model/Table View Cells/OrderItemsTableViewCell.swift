@@ -11,6 +11,8 @@ import UIKit
 /// A custom TableViewCell that stores Order Item information.
 class OrderItemsTableViewCell: UITableViewCell {
     
+    var orderItem: OrderItem!
+    
     @IBOutlet weak var itemNameLbl: UILabel!
     @IBOutlet weak var itemQtyLbl: UILabel!
     @IBOutlet weak var itemModTf: UITextField!
@@ -26,6 +28,7 @@ class OrderItemsTableViewCell: UITableViewCell {
     
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        orderItem?.quantity = Int(sender.value)
         itemQtyLbl.text = Int(sender.value).description
     }
 }

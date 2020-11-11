@@ -18,18 +18,24 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     public var order: Order?
     
+    let currencyFormatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        order?.orderItems = DatabaseAccess.getOrderDetails(orderID: order!.id)
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.currencySymbol = "$"
+        
+        order!.orderItems = DatabaseAccess.getOrderDetails(orderID: order!.id)
         
         DispatchQueue.main.async {
             self.orderItemsTable.reloadData()
         }
         
-        orderNumLbl.text = "Order # \(order?.id ?? 0)"
-        tableNumLbl.text = "Table # \(order?.tableId ?? 0)"
-        costNumLbl.text = "Total Cost: $\(order?.totalPrice ?? 0.00)"
+        orderNumLbl.text = "Order # \(order!.id)"
+        tableNumLbl.text = "Table # \(order!.tableId)"
+        costNumLbl.text = "Total Cost: \(currencyFormatter.string(from: NSNumber(value: order!.totalPrice)) ?? "0.00")"
         
         if order?.status == "Cancelled" {
             saveOrderBtn.isEnabled = false
@@ -44,8 +50,13 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
         return 100
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : OrderItemsTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "orderItem") as? OrderItemsTableViewCell ?? OrderItemsTableViewCell(style:UITableViewCell.CellStyle.default, reuseIdentifier: "orderItem")
+        cell?.orderItem = order!.orderItems![indexPath.row]
         cell?.itemNameLbl.text = order!.orderItems![indexPath.row].menuItem.name
         cell?.itemModTf.text = order!.orderItems![indexPath.row].itemModification
         cell?.itemQtyLbl.text = String(order!.orderItems![indexPath.row].quantity)
@@ -67,6 +78,9 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
                     if DatabaseAccess.editOrderItem(orderItem: self.order!.orderItems![indexPath.row], delete: true) == 1 {
                         self.order!.orderItems!.remove(at: indexPath.row)
                         self.orderItemsTable.deleteRows(at: [indexPath], with: .fade)
+                        
+                        self.order!.updateTotalWithTax()
+                        self.costNumLbl.text = "Total Price: \(self.currencyFormatter.string(from: NSNumber(value: self.order!.totalPrice)) ?? "0.00")"
                     } else {
                         let errorAlert = UIAlertController(title: "ERROR", message: "An error occurred, this order item was not properly deleted.", preferredStyle: .alert)
                         errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -82,21 +96,11 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
         return swipeActions
     }
-
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
     
     @IBAction func saveOrder(_ sender: Any) {
         let saveAlert = UIAlertController(title: "Save this order?", message: "Are you sure you want to save your changes? This cannot be undone.", preferredStyle: .alert)
         saveAlert.addAction(UIAlertAction(title: "Yes", style: .default) { _ in
-            var priceTotal: Float = 0.0
-            
-            for orderItem in self.order!.orderItems! {
-                priceTotal = Float(orderItem.quantity) * orderItem.menuItem.price
-            }
-            
-            self.order!.totalPrice = priceTotal
+            self.order!.updateTotalWithTax()
             
             if DatabaseAccess.editOrder(order: self.order!) == 1 {
                 for row in 0...self.orderItemsTable.numberOfRows(inSection: 0) {
@@ -109,17 +113,15 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
                         self.order!.orderItems![indexPath.row].itemModification = cell?.itemModTf.text ?? ""
                         self.order!.orderItems![indexPath.row].quantity = Int(cell?.itemQtyStepper.value ?? 0)
                         
-                        if DatabaseAccess.editOrderItem(orderItem: self.order!.orderItems![indexPath.row], delete: false) == 1 {
-                            let successAlert = UIAlertController(title: "Success", message: "\(self.order!.orderItems![indexPath.row].menuItem.name) on Order \(self.order!.id) was successfully saved.", preferredStyle: .alert)
-                            successAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(successAlert, animated: true, completion: nil)
-                        } else {
-                            let errorAlert = UIAlertController(title: "ERROR", message: "An error occurred, this order item was not properly saved.", preferredStyle: .alert)
-                            errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                            self.present(errorAlert, animated: true, completion: nil)
-                        }
+                        _ = DatabaseAccess.editOrderItem(orderItem: self.order!.orderItems![indexPath.row], delete: false)
                     }
                 }
+                
+                let successAlert = UIAlertController(title: "Success", message: "Order # \(self.order!.id) was successfully saved.", preferredStyle: .alert)
+                successAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(successAlert, animated: true, completion: nil)
+                
+                self.costNumLbl.text = "Total Price: \(self.currencyFormatter.string(from: NSNumber(value: self.order!.totalPrice)) ?? "0.00")"
             } else {
                 let errorAlert = UIAlertController(title: "ERROR", message: "An error occurred, this order was not properly saved.", preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "OK", style: .default))

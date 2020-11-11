@@ -86,7 +86,7 @@
                     <connections>
                         <outlet property="idTextField" destination="KBN-CW-4Jl" id="vcI-sa-tUL"/>
                         <outlet property="loginButton" destination="mKc-aP-CEL" id="wUJ-Qf-pK5"/>
-                        <segue destination="BYZ-38-t0r" kind="push" identifier="loginView" id="Mtv-NX-3GZ"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="loginView" id="Mtv-NX-3GZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zVs-No-UPG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -559,20 +559,20 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Item Modifications" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xKM-ww-cDy">
-                                                    <rect key="frame" x="16" y="55" width="516" height="34"/>
+                                                    <rect key="frame" x="16" y="55" width="525" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="GFc-T6-Ihg">
-                                                    <rect key="frame" x="438" y="5" width="94" height="32"/>
+                                                    <rect key="frame" x="447" y="4" width="94" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="stepperValueChanged:" destination="L7E-HH-cKC" eventType="valueChanged" id="fZB-Tc-A0h"/>
                                                     </connections>
                                                 </stepper>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2t-uH-xaq">
-                                                    <rect key="frame" x="355" y="10" width="75" height="21"/>
+                                                    <rect key="frame" x="364" y="10" width="75" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
