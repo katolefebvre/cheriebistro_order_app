@@ -14,9 +14,12 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var viewAllBtn: UIButton!
     @IBOutlet weak var viewPendingBtn: UIButton!
     @IBOutlet weak var viewConfirmedBtn: UIButton!
+    @IBOutlet weak var viewMineBtn: GlacoButton!
     
     var orders: [Order] = []
     var visibleOrders: [Order] = []
+    
+    var mainDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +54,7 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
         viewAllBtn.isEnabled = false
         viewPendingBtn.isEnabled = true
         viewConfirmedBtn.isEnabled = true
+        viewMineBtn.isEnabled = true
     }
     
     @IBAction private func viewPendingOrders() {
@@ -69,6 +73,7 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
         viewAllBtn.isEnabled = true
         viewPendingBtn.isEnabled = false
         viewConfirmedBtn.isEnabled = true
+        viewMineBtn.isEnabled = true
     }
     
     @IBAction private func viewConfirmedOrders() {
@@ -87,6 +92,28 @@ class TableOrdersViewController: UIViewController, UITableViewDelegate, UITableV
         viewAllBtn.isEnabled = true
         viewPendingBtn.isEnabled = true
         viewConfirmedBtn.isEnabled = false
+        viewMineBtn.isEnabled = true
+    }
+    
+    @IBAction private func viewMyOrders() {
+        visibleOrders = []
+        
+        for o in orders {
+            for table in mainDelegate.loggedEmployee!.tables {
+                if o.tableId == Int(table) {
+                    visibleOrders.append(o)
+                }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.ordersTable.reloadData()
+        }
+        
+        viewAllBtn.isEnabled = true
+        viewPendingBtn.isEnabled = true
+        viewConfirmedBtn.isEnabled = true
+        viewMineBtn.isEnabled = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -296,6 +296,20 @@
                                     <action selector="viewConfirmedOrders" destination="WOz-aq-Qq2" eventType="touchUpInside" id="lbm-rl-xQM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyY-gY-fsc" customClass="GlacoButton" customModule="GlacoOrderApp" customModuleProvider="target">
+                                <rect key="frame" x="434" y="170" width="130" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="My Orders">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="viewMyOrders" destination="WOz-aq-Qq2" eventType="touchUpInside" id="1xB-Fl-l40"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JOy-Go-ZYd"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -305,6 +319,7 @@
                         <outlet property="ordersTable" destination="s7O-Vn-Bcq" id="YIg-yu-hmq"/>
                         <outlet property="viewAllBtn" destination="UA1-3U-Bgo" id="FdV-ad-tcp"/>
                         <outlet property="viewConfirmedBtn" destination="IV1-5G-X23" id="dZt-Tg-LXy"/>
+                        <outlet property="viewMineBtn" destination="gyY-gY-fsc" id="gyH-Bf-hMn"/>
                         <outlet property="viewPendingBtn" destination="CgG-KH-oCL" id="Y4Q-cz-jb3"/>
                     </connections>
                 </viewController>
@@ -895,6 +910,9 @@
         </designable>
         <designable name="ayD-FD-pvy">
             <size key="intrinsicContentSize" width="131" height="42"/>
+        </designable>
+        <designable name="gyY-gY-fsc">
+            <size key="intrinsicContentSize" width="98" height="36"/>
         </designable>
         <designable name="jy2-mS-bhr">
             <size key="intrinsicContentSize" width="225" height="42"/>

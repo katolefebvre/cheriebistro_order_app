@@ -158,7 +158,7 @@ class DatabaseAccess {
                 
                 for employee in employeeArray {
                     if let e = employee as? [String : Any] {
-                        results.append(Employee(id: e["employeeID"]! as! String, name: e["employeeName"]! as! String, roleID: e["roleID"]! as! String, roleName: e["roleName"]! as! String))
+                        results.append(Employee(id: e["employeeID"]! as! String, name: e["employeeName"]! as! String, roleID: e["roleID"]! as! String, roleName: e["roleName"]! as! String, tables: []))
                     }
                 }
             } catch {
@@ -416,7 +416,6 @@ class DatabaseAccess {
     /// Sends a request to login as an employee with the provided ID
     /// - Parameter loginId: Employee ID.
     class func loginEmployee(loginId : String) -> Employee? {
-        
         var employee : Employee?
         let myUrl = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/loginUser.php")!
         let request = NSMutableURLRequest(url: myUrl)
@@ -439,16 +438,24 @@ class DatabaseAccess {
                 LoginJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
             
                 if let parseJSON = LoginJSON {
-                    let response:String = parseJSON["status"] as! String;
-                    print("result: \(response)")
-
+                    let response:String = parseJSON["status"] as! String
+                    
                     if response == "Success" {
-                        let employeeId : String = LoginJSON["employeeID"] as! String
-                        let employeeName : String = LoginJSON["employeeName"] as! String
-                        let roleID : String = LoginJSON["roleID"] as! String
-                        let roleName : String = LoginJSON["roleName"] as! String
+                        let employeeId: String = LoginJSON["employeeID"] as! String
+                        let employeeName: String = LoginJSON["employeeName"] as! String
+                        let roleID: String = LoginJSON["roleID"] as! String
+                        let roleName: String = LoginJSON["roleName"] as! String
                         
-                        employee = Employee(id: employeeId, name: employeeName, roleID: roleID, roleName: roleName)
+                        let tablesArray: NSArray = parseJSON["tables"] as! NSArray
+                        var tables: [String] = []
+                        
+                        for table in tablesArray {
+                            if let t = table as? [String : Any] {
+                                tables.append(t["tableID"]! as! String)
+                            }
+                        }
+                        
+                        employee = Employee(id: employeeId, name: employeeName, roleID: roleID, roleName: roleName, tables: tables)
                     } else {
                         print("error")
                     }

@@ -49,13 +49,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let employeeID = idTextField.text;
         
-        if employeeID!.isEmpty
-        {
+        if employeeID!.isEmpty {
             return
         }
         
         if let foundEmployee = DatabaseAccess.loginEmployee(loginId: employeeID!) {
-            
             mainDelegate.loggedEmployee = foundEmployee
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "loginView", sender: nil)
