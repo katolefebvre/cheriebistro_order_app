@@ -269,35 +269,21 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CgG-KH-oCL" customClass="GlacoButton" customModule="GlacoOrderApp" customModuleProvider="target">
-                                <rect key="frame" x="158" y="170" width="130" height="40"/>
+                                <rect key="frame" x="158" y="170" width="160" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Pending">
+                                <state key="normal" title="Status">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="viewPendingOrders" destination="WOz-aq-Qq2" eventType="touchUpInside" id="P0O-nO-3rx"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IV1-5G-X23" customClass="GlacoButton" customModule="GlacoOrderApp" customModuleProvider="target">
-                                <rect key="frame" x="296" y="170" width="130" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="Confirmed">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="rounded" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="viewConfirmedOrders" destination="WOz-aq-Qq2" eventType="touchUpInside" id="lbm-rl-xQM"/>
+                                    <action selector="displayStatusPopover:" destination="WOz-aq-Qq2" eventType="touchUpInside" id="BMP-aP-oT6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyY-gY-fsc" customClass="GlacoButton" customModule="GlacoOrderApp" customModuleProvider="target">
-                                <rect key="frame" x="434" y="170" width="130" height="40"/>
+                                <rect key="frame" x="326" y="170" width="130" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="My Orders">
@@ -318,14 +304,69 @@
                     <connections>
                         <outlet property="ordersTable" destination="s7O-Vn-Bcq" id="YIg-yu-hmq"/>
                         <outlet property="viewAllBtn" destination="UA1-3U-Bgo" id="FdV-ad-tcp"/>
-                        <outlet property="viewConfirmedBtn" destination="IV1-5G-X23" id="dZt-Tg-LXy"/>
                         <outlet property="viewMineBtn" destination="gyY-gY-fsc" id="gyH-Bf-hMn"/>
-                        <outlet property="viewPendingBtn" destination="CgG-KH-oCL" id="Y4Q-cz-jb3"/>
+                        <outlet property="viewStatusBtn" destination="CgG-KH-oCL" id="Wbf-8e-JFu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCt-FT-8AA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138.69346733668343" y="1908.6330935251799"/>
+        </scene>
+        <!--Order Status Popover View Controller-->
+        <scene sceneID="9Dj-uu-b2z">
+            <objects>
+                <viewController storyboardIdentifier="OrderStatusPopoverViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mur-uB-SQa" customClass="OrderStatusPopoverViewController" customModule="GlacoOrderApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OTX-4O-gIq">
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W81-ns-c3u">
+                                <rect key="frame" x="0.0" y="0.0" width="1194" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Yok-Jr-agi"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Order Statuses" id="pvU-4E-5yj"/>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oHN-ad-QGP">
+                                <rect key="frame" x="0.0" y="44" width="1194" height="790"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="status" id="Hcg-ee-a9u">
+                                        <rect key="frame" x="0.0" y="28" width="1194" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hcg-ee-a9u" id="LRS-Sb-9cC">
+                                            <rect key="frame" x="0.0" y="0.0" width="1194" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="mur-uB-SQa" id="9hg-IE-v9S"/>
+                                    <outlet property="delegate" destination="mur-uB-SQa" id="6rg-mu-pRr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ROg-pw-PGL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oHN-ad-QGP" firstAttribute="leading" secondItem="ROg-pw-PGL" secondAttribute="leading" id="6io-SH-zFo"/>
+                            <constraint firstAttribute="bottom" secondItem="oHN-ad-QGP" secondAttribute="bottom" id="9LB-f3-94j"/>
+                            <constraint firstItem="W81-ns-c3u" firstAttribute="trailing" secondItem="oHN-ad-QGP" secondAttribute="trailing" id="I7h-C6-g4l"/>
+                            <constraint firstItem="oHN-ad-QGP" firstAttribute="top" secondItem="W81-ns-c3u" secondAttribute="bottom" id="SLx-8F-39h"/>
+                            <constraint firstItem="W81-ns-c3u" firstAttribute="leading" secondItem="oHN-ad-QGP" secondAttribute="leading" id="VjD-Kv-Mcm"/>
+                            <constraint firstItem="oHN-ad-QGP" firstAttribute="trailing" secondItem="ROg-pw-PGL" secondAttribute="trailing" id="qQL-wv-ihG"/>
+                            <constraint firstItem="W81-ns-c3u" firstAttribute="top" secondItem="ROg-pw-PGL" secondAttribute="top" id="uRn-2i-Gi5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="statusTable" destination="oHN-ad-QGP" id="9q6-ke-nDj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGd-ga-ayG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="2550"/>
         </scene>
         <!--Add Food Item-->
         <scene sceneID="WoX-0i-Yv8">
@@ -888,13 +929,10 @@
             <size key="intrinsicContentSize" width="169" height="42"/>
         </designable>
         <designable name="CgG-KH-oCL">
-            <size key="intrinsicContentSize" width="78" height="36"/>
+            <size key="intrinsicContentSize" width="62" height="36"/>
         </designable>
         <designable name="GNF-rJ-8sS">
             <size key="intrinsicContentSize" width="89" height="36"/>
-        </designable>
-        <designable name="IV1-5G-X23">
-            <size key="intrinsicContentSize" width="100" height="36"/>
         </designable>
         <designable name="JQY-vL-1VF">
             <size key="intrinsicContentSize" width="179" height="42"/>

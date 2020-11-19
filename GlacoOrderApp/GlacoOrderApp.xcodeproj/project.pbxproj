@@ -11,6 +11,8 @@
 		7DAB81072534071600CD9970 /* TableOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAB81062534071600CD9970 /* TableOrdersViewController.swift */; };
 		7DAFBC9325354DDC004B1D22 /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAFBC9225354DDC004B1D22 /* OrderDetailsViewController.swift */; };
 		7DCB8FDF2557C578005995D5 /* GlacoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB8FDE2557C578005995D5 /* GlacoButton.swift */; };
+		7DDF785A256636D4001730F6 /* OrderStatusPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF7859256636D4001730F6 /* OrderStatusPopoverViewController.swift */; };
+		7DDF785D25663710001730F6 /* OrderStatusPopoverControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDF785C25663710001730F6 /* OrderStatusPopoverControlDelegate.swift */; };
 		7DE0AD7B2536074E00B99BE8 /* OrderItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE0AD7A2536074E00B99BE8 /* OrderItemsTableViewCell.swift */; };
 		7DEDDF5B2534FA9E00F8E4FC /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEDDF5A2534FA9E00F8E4FC /* OrderItem.swift */; };
 		7DEDDF5E25352EB800F8E4FC /* OrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEDDF5D25352EB800F8E4FC /* OrdersTableViewCell.swift */; };
@@ -48,6 +50,8 @@
 		7DAB81062534071600CD9970 /* TableOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrdersViewController.swift; sourceTree = "<group>"; };
 		7DAFBC9225354DDC004B1D22 /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
 		7DCB8FDE2557C578005995D5 /* GlacoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlacoButton.swift; sourceTree = "<group>"; };
+		7DDF7859256636D4001730F6 /* OrderStatusPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusPopoverViewController.swift; sourceTree = "<group>"; };
+		7DDF785C25663710001730F6 /* OrderStatusPopoverControlDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusPopoverControlDelegate.swift; sourceTree = "<group>"; };
 		7DE0AD7A2536074E00B99BE8 /* OrderItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemsTableViewCell.swift; sourceTree = "<group>"; };
 		7DEDDF5A2534FA9E00F8E4FC /* OrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
 		7DEDDF5D25352EB800F8E4FC /* OrdersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersTableViewCell.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 				CD815986242BA24A00501365 /* TimeSlotPopoverViewController.swift */,
 				CD146166251B9589000CC32B /* EmployeePopoverViewController.swift */,
 				CD91FB2B252119E90062D63D /* RolePopoverViewController.swift */,
+				7DDF7859256636D4001730F6 /* OrderStatusPopoverViewController.swift */,
 			);
 			path = Popovers;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 				CD815988242BA2DA00501365 /* TimeSlotPopoverControllerDelegate.swift */,
 				CD14616C251B9F9C000CC32B /* EmployeePopoverControlDelegate.swift */,
 				CD91FB242521166B0062D63D /* RolePopoverControlDelegate.swift */,
+				7DDF785C25663710001730F6 /* OrderStatusPopoverControlDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -304,9 +310,11 @@
 				AE30182F24378DC500037289 /* LoginViewController.swift in Sources */,
 				CD92831F24180F54009830A9 /* AppDelegate.swift in Sources */,
 				CD928336241810D8009830A9 /* Category.swift in Sources */,
+				7DDF785D25663710001730F6 /* OrderStatusPopoverControlDelegate.swift in Sources */,
 				CD2FB7E72419A799005F134D /* CategoryPopoverControllerDelegate.swift in Sources */,
 				7DAB81072534071600CD9970 /* TableOrdersViewController.swift in Sources */,
 				7DAB8104253406BA00CD9970 /* Order.swift in Sources */,
+				7DDF785A256636D4001730F6 /* OrderStatusPopoverViewController.swift in Sources */,
 				7DAFBC9325354DDC004B1D22 /* OrderDetailsViewController.swift in Sources */,
 				CD92832124180F54009830A9 /* SceneDelegate.swift in Sources */,
 				7DE0AD7B2536074E00B99BE8 /* OrderItemsTableViewCell.swift in Sources */,
