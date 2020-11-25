@@ -660,4 +660,8 @@ class DatabaseAccess {
         
         return result
     }
+    
+    class func getAssignedTables() -> [Table] {
+        
+    }
 }
