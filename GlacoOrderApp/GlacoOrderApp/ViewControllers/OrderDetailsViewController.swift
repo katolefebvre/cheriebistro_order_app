@@ -37,7 +37,7 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
         tableNumLbl.text = "Table # \(order!.tableId)"
         costNumLbl.text = "Total Cost: \(currencyFormatter.string(from: NSNumber(value: order!.totalPrice)) ?? "0.00")"
         
-        if order?.status == "Cancelled" {
+        if order?.status != "Pending" && order?.status != "Confirmed" {
             saveOrderBtn.isEnabled = false
         }
     }
@@ -62,7 +62,7 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
         cell?.itemQtyLbl.text = String(order!.orderItems![indexPath.row].quantity)
         cell?.itemQtyStepper.value = Double(order!.orderItems![indexPath.row].quantity)
         
-        if (order!.status != "Cancelled" && order!.orderItems!.count > 1) {
+        if ((order!.status == "Pending" || order!.status == "Confirmed") && order!.orderItems!.count > 1) {
             cell?.accessoryType = .disclosureIndicator
         }
         
