@@ -662,6 +662,81 @@ class DatabaseAccess {
     }
     
     class func getAssignedTables() -> [Table] {
+        var results : [Table] = []
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/getAssignedTables.php")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "GET"
+        let semaphore = DispatchSemaphore(value: 0)
         
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error")
+                return
+            }
+            
+            do {
+                var tablesJSON : NSDictionary!
+                tablesJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                let tableArray : NSArray = tablesJSON["tables"] as! NSArray
+        
+                for table in tableArray {
+                    if let t = table as? [String : Any] {
+                        results.append(Table(id : t["tableID"]! as! String, employeeId: t["employeeID"]! as! String))
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return results
+    }
+    
+    class func unassignTable(tableID : String) -> Bool {
+        var result = false
+        
+        let intID = Int(tableID)
+        let url = URL(string: "http://142.55.32.86:50131/cheriebistro/cheriebistro/api/unassignTable.php")!
+        let request = NSMutableURLRequest(url: url)
+        
+        request.httpMethod = "POST"
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let dataString = "tableID=\(intID ?? 0)"
+        request.httpBody = dataString.data(using: .utf8)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            if error != nil {
+                print("error")
+                return
+            }
+            
+            do {
+                var resultJSON : NSDictionary!
+                resultJSON = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary
+                
+                if let parseJSON = resultJSON {
+                    if parseJSON["tableUpdate"] as! Int == 1 {
+                        result = true
+                    } else {
+                        result = false
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        _ = semaphore.wait(wallTimeout: .distantFuture)
+        return result
     }
 }
